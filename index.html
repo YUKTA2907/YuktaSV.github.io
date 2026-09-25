@@ -83,6 +83,25 @@
 
       .modal-backdrop { transition: opacity .25s ease; }
       .modal-panel { transition: transform .3s cubic-bezier(.22,1,.36,1), opacity .3s ease; }
+
+      /* ===== Activities timeline ===== */
+      .timeline { position: relative; display: grid; gap: 22px; padding-left: 70px; }
+      .timeline::before { content: ''; position: absolute; top: 22px; bottom: 22px; left: 21px; width: 1px; background: linear-gradient(#10b981, #06b6d4 50%, #34d399); }
+      .act-card { position: relative; border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; background: linear-gradient(125deg, rgba(18,27,22,0.9), rgba(10,15,13,0.88)); box-shadow: 0 16px 50px rgba(0,0,0,0.16); transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; }
+      .act-card:hover { transform: translateY(-3px); border-color: rgba(16,185,129,0.4); box-shadow: 0 20px 50px rgba(0,0,0,0.3), 0 0 28px rgba(16,185,129,0.06); }
+      .act-node { position: absolute; left: -70px; top: 20px; width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid #10b981; border-radius: 12px; background: #0b1320; box-shadow: 0 0 20px rgba(16,185,129,0.18); font: 600 .85rem 'JetBrains Mono', monospace; color: #6ee7b7; }
+      .act-card:nth-child(2) .act-node { border-color: #06b6d4; box-shadow: 0 0 20px rgba(6,182,212,0.18); color: #67e8f9; }
+      .act-card:nth-child(3) .act-node { border-color: #f59e0b; box-shadow: 0 0 20px rgba(245,158,11,0.18); color: #fcd34d; }
+      .act-card:nth-child(4) .act-node { border-color: #34d399; box-shadow: 0 0 20px rgba(52,211,153,0.18); color: #6ee7b7; }
+      .act-body { max-height: 0; overflow: hidden; transition: max-height .4s cubic-bezier(.22,1,.36,1); }
+      .act-card.open .act-body { max-height: 600px; }
+      .act-chevron { transition: transform .3s ease; }
+      .act-card.open .act-chevron { transform: rotate(180deg); }
+      @media (max-width: 680px) {
+        .timeline { padding-left: 46px; gap: 16px; }
+        .timeline::before { left: 14px; }
+        .act-node { left: -46px; width: 32px; height: 32px; border-radius: 10px; top: 18px; font-size: .7rem; }
+      }
     </style>
     <meta property="og:image" content="https://bolt.new/static/og_default.png">
     <meta name="twitter:card" content="summary_large_image">
@@ -105,6 +124,7 @@
           <button data-nav="home" class="nav-link px-4 py-2 rounded-lg text-sm text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Home</button>
           <button data-nav="about" class="nav-link px-4 py-2 rounded-lg text-sm text-slate-300 hover:text-white hover:bg-white/5 transition-colors">About</button>
           <button data-nav="skills" class="nav-link px-4 py-2 rounded-lg text-sm text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Skills</button>
+          <button data-nav="activities" class="nav-link px-4 py-2 rounded-lg text-sm text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Activities</button>
           <button data-nav="projects" class="nav-link px-4 py-2 rounded-lg text-sm text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Projects</button>
           <button data-nav="terminal" class="nav-link px-4 py-2 rounded-lg text-sm text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Terminal</button>
           <button data-nav="contact" class="nav-link px-4 py-2 rounded-lg text-sm text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Contact</button>
@@ -125,6 +145,7 @@
           <button data-nav="home" class="mob-nav px-4 py-3 rounded-lg text-left text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Home</button>
           <button data-nav="about" class="mob-nav px-4 py-3 rounded-lg text-left text-slate-300 hover:text-white hover:bg-white/5 transition-colors">About</button>
           <button data-nav="skills" class="mob-nav px-4 py-3 rounded-lg text-left text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Skills</button>
+          <button data-nav="activities" class="mob-nav px-4 py-3 rounded-lg text-left text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Activities</button>
           <button data-nav="projects" class="mob-nav px-4 py-3 rounded-lg text-left text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Projects</button>
           <button data-nav="terminal" class="mob-nav px-4 py-3 rounded-lg text-left text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Terminal</button>
           <button data-nav="contact" class="mob-nav px-4 py-3 rounded-lg text-left text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Contact</button>
@@ -154,12 +175,12 @@
 
         <h1 class="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight mb-6 animate-fade-up" style="animation-delay:.08s">
           <span class="text-white">Hi, I'm </span>
-          <span class="gradient-text text-glow">Yukta S Viraktamath</span>
+          <span class="gradient-text text-glow"><span id="typedName"></span><span class="cursor-blink text-emerald-400">▋</span></span>
         </h1>
 
         <div class="h-8 mb-8 animate-fade-up" style="animation-delay:.16s">
-          <p class="text-lg sm:text-xl text-slate-300">
-            <span id="typed" class="font-mono text-emerald-400"></span><span class="cursor-blink text-emerald-400">▋</span>
+          <p class="text-lg sm:text-xl text-slate-300 font-medium">
+            Full-Stack Developer · Algorithmic Problem Solver · Data Science Enthusiast
           </p>
         </div>
 
@@ -289,6 +310,97 @@
       </div>
     </section>
 
+    <!-- Activities -->
+    <section id="activities" class="relative max-w-4xl mx-auto px-6 py-24 md:py-32">
+      <div class="text-center mb-12 reveal">
+        <p class="text-emerald-400 font-medium text-sm uppercase tracking-widest mb-3">Activity Log</p>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white">My <span class="gradient-text">activities</span></h2>
+        <p class="text-slate-400 mt-4 text-sm">Activity 0 — Activity 4 · Click a card to expand</p>
+      </div>
+
+      <div class="timeline reveal">
+        <article class="act-card">
+          <span class="act-node">0</span>
+          <button class="act-toggle w-full text-left p-6 flex items-center justify-between gap-4">
+            <div>
+              <p class="text-emerald-400 font-mono text-xs uppercase tracking-wide mb-1">Activity 0</p>
+              <h3 class="text-lg font-semibold text-white">Development Environment Setup</h3>
+            </div>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 act-chevron shrink-0"></i>
+          </button>
+          <div class="act-body"><div class="px-6 pb-6">
+            <p class="text-slate-300 leading-relaxed text-sm mb-4">Configured a complete development environment with the essential tools for programming, including VS Code, Git, terminal utilities, and language support for C, C++, and Python.</p>
+            <div class="flex flex-wrap gap-2"><span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-xs text-slate-300 font-mono">VS Code</span><span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-xs text-slate-300 font-mono">Git</span><span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-xs text-slate-300 font-mono">Terminal</span></div>
+          </div></div>
+        </article>
+
+        <article class="act-card">
+          <span class="act-node">1</span>
+          <button class="act-toggle w-full text-left p-6 flex items-center justify-between gap-4">
+            <div>
+              <p class="text-cyan-400 font-mono text-xs uppercase tracking-wide mb-1">Activity 1</p>
+              <h3 class="text-lg font-semibold text-white">VS Code &amp; Workspace Configuration</h3>
+            </div>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 act-chevron shrink-0"></i>
+          </button>
+          <div class="act-body"><div class="px-6 pb-6">
+            <p class="text-slate-300 leading-relaxed text-sm mb-4">Learned and configured my primary development environment using Visual Studio Code. Explored essential extensions, workspace customization, compiler configurations, and basic programming setup.</p>
+            <div class="flex flex-wrap gap-2"><span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-xs text-slate-300 font-mono">VS Code</span><span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-xs text-slate-300 font-mono">Extensions</span><span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-xs text-slate-300 font-mono">Compiler</span></div>
+          </div></div>
+        </article>
+
+        <article class="act-card">
+          <span class="act-node">2</span>
+          <button class="act-toggle w-full text-left p-6 flex items-center justify-between gap-4">
+            <div>
+              <p class="text-amber-400 font-mono text-xs uppercase tracking-wide mb-1">Activity 2</p>
+              <h3 class="text-lg font-semibold text-white">Git &amp; GitHub Integration</h3>
+            </div>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 act-chevron shrink-0"></i>
+          </button>
+          <div class="act-body"><div class="px-6 pb-6">
+            <p class="text-slate-300 leading-relaxed text-sm mb-4">Learned the fundamentals of version control using Git and GitHub. Created my first C programming repository named <span class="font-mono text-emerald-400">hello-world-c</span> to manage and track source code versions.</p>
+            <div class="flex flex-wrap gap-2 mb-4"><span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-xs text-slate-300 font-mono">Git</span><span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-xs text-slate-300 font-mono">GitHub</span><span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-xs text-slate-300 font-mono">C</span></div>
+            <a href="https://github.com/YUKTA2907/HELLOWORLD-c" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-medium transition-colors"><i data-lucide="github" class="w-4 h-4"></i> View Repository</a>
+          </div></div>
+        </article>
+
+        <article class="act-card">
+          <span class="act-node">3</span>
+          <button class="act-toggle w-full text-left p-6 flex items-center justify-between gap-4">
+            <div>
+              <p class="text-emerald-400 font-mono text-xs uppercase tracking-wide mb-1">Activity 3</p>
+              <h3 class="text-lg font-semibold text-white">GitLens &amp; Live Share Exploration</h3>
+            </div>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 act-chevron shrink-0"></i>
+          </button>
+          <div class="act-body"><div class="px-6 pb-6">
+            <p class="text-slate-300 leading-relaxed text-sm mb-4">Explored productivity tools in VS Code, including GitLens for visualizing repository history and commit blame, as well as Live Share for real-time collaborative pair-programming workflows.</p>
+            <div class="flex flex-wrap gap-2"><span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-xs text-slate-300 font-mono">GitLens</span><span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-xs text-slate-300 font-mono">Live Share</span><span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-xs text-slate-300 font-mono">Collaboration</span></div>
+          </div></div>
+        </article>
+
+        <article class="act-card">
+          <span class="act-node">4</span>
+          <button class="act-toggle w-full text-left p-6 flex items-center justify-between gap-4">
+            <div>
+              <p class="text-emerald-400 font-mono text-xs uppercase tracking-wide mb-1">Activity 4</p>
+              <h3 class="text-lg font-semibold text-white">LeetCode Algorithmic Practice</h3>
+            </div>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 act-chevron shrink-0"></i>
+          </button>
+          <div class="act-body"><div class="px-6 pb-6">
+            <p class="text-slate-300 leading-relaxed text-sm mb-4">Created a dedicated repository named <span class="font-mono text-emerald-400">leetcode-solutions</span> to organize and archive C language problem-solving solutions while practicing logic on LeetCode.</p>
+            <div class="flex flex-wrap gap-2 mb-4"><span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-xs text-slate-300 font-mono">LeetCode</span><span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-xs text-slate-300 font-mono">C</span><span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-xs text-slate-300 font-mono">DSA</span></div>
+            <div class="flex flex-wrap gap-3">
+              <a href="https://github.com/YUKTA2907/leetcode-solutions" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-medium transition-colors"><i data-lucide="github" class="w-4 h-4"></i> View Repository</a>
+              <a href="https://leetcode.com/u/Yukta_2907/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-200 text-sm font-medium border border-white/10 transition-all"><i data-lucide="code-2" class="w-4 h-4 text-cyan-400"></i> View Profile</a>
+            </div>
+          </div></div>
+        </article>
+      </div>
+    </section>
+
     <!-- Projects -->
     <section id="projects" class="relative max-w-6xl mx-auto px-6 py-24 md:py-32">
       <div class="text-center mb-10 reveal">
@@ -386,14 +498,28 @@
             <p class="text-white font-semibold text-lg">Yukta S Viraktamath</p>
             <p class="text-slate-400 text-sm mt-1">B.Tech CSIT · REVA University · Bengaluru</p>
           </div>
-          <div class="flex items-center gap-3">
-            <a href="https://github.com/YUKTA2907" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-10 h-10 rounded-xl glass text-slate-200 hover:text-white transition-colors" aria-label="GitHub"><i data-lucide="github" class="w-4 h-4"></i></a>
-            <a href="https://www.linkedin.com/in/yukta-s-viraktamath-64a1293b4/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-10 h-10 rounded-xl glass text-slate-200 hover:text-white transition-colors" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
-            <a href="https://leetcode.com/u/Yukta_2907/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-10 h-10 rounded-xl glass text-slate-200 hover:text-white transition-colors" aria-label="LeetCode"><i data-lucide="code-2" class="w-4 h-4"></i></a>
-            <a href="https://www.hackerrank.com/profile/yukta29nvn" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-10 h-10 rounded-xl glass text-slate-200 hover:text-white transition-colors" aria-label="HackerRank"><i data-lucide="trophy" class="w-4 h-4"></i></a>
-            <button data-nav="home" class="nav-link inline-flex items-center justify-center w-10 h-10 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white transition-colors" aria-label="Back to top"><i data-lucide="arrow-up" class="w-5 h-5"></i></button>
-          </div>
+          <button data-nav="home" class="nav-link inline-flex items-center justify-center w-10 h-10 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white transition-colors" aria-label="Back to top"><i data-lucide="arrow-up" class="w-5 h-5"></i></button>
         </div>
+
+        <div class="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <a href="https://github.com/YUKTA2907" target="_blank" rel="noopener noreferrer" class="glass rounded-xl p-4 flex items-center gap-3 hover:border-emerald-400/40 hover:-translate-y-1 transition-all duration-300 group">
+            <span class="flex items-center justify-center w-10 h-10 rounded-lg bg-emerald-500/15 text-emerald-300 shrink-0"><i data-lucide="github" class="w-5 h-5"></i></span>
+            <div class="min-w-0"><p class="text-white text-sm font-medium truncate">GitHub</p><p class="text-emerald-400 text-xs group-hover:text-emerald-300 transition-colors">View Profile →</p></div>
+          </a>
+          <a href="https://www.linkedin.com/in/yukta-s-viraktamath-64a1293b4/" target="_blank" rel="noopener noreferrer" class="glass rounded-xl p-4 flex items-center gap-3 hover:border-cyan-400/40 hover:-translate-y-1 transition-all duration-300 group">
+            <span class="flex items-center justify-center w-10 h-10 rounded-lg bg-cyan-500/15 text-cyan-300 shrink-0"><i data-lucide="linkedin" class="w-5 h-5"></i></span>
+            <div class="min-w-0"><p class="text-white text-sm font-medium truncate">LinkedIn</p><p class="text-cyan-400 text-xs group-hover:text-cyan-300 transition-colors">View Profile →</p></div>
+          </a>
+          <a href="https://leetcode.com/u/Yukta_2907/" target="_blank" rel="noopener noreferrer" class="glass rounded-xl p-4 flex items-center gap-3 hover:border-emerald-400/40 hover:-translate-y-1 transition-all duration-300 group">
+            <span class="flex items-center justify-center w-10 h-10 rounded-lg bg-emerald-500/15 text-emerald-300 shrink-0"><i data-lucide="code-2" class="w-5 h-5"></i></span>
+            <div class="min-w-0"><p class="text-white text-sm font-medium truncate">LeetCode</p><p class="text-emerald-400 text-xs group-hover:text-emerald-300 transition-colors">View Profile →</p></div>
+          </a>
+          <a href="https://www.hackerrank.com/profile/yukta29nvn" target="_blank" rel="noopener noreferrer" class="glass rounded-xl p-4 flex items-center gap-3 hover:border-amber-400/40 hover:-translate-y-1 transition-all duration-300 group">
+            <span class="flex items-center justify-center w-10 h-10 rounded-lg bg-amber-500/15 text-amber-300 shrink-0"><i data-lucide="trophy" class="w-5 h-5"></i></span>
+            <div class="min-w-0"><p class="text-white text-sm font-medium truncate">HackerRank</p><p class="text-amber-400 text-xs group-hover:text-amber-300 transition-colors">View Profile →</p></div>
+          </a>
+        </div>
+
         <div class="mt-8 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-slate-500">
           <p class="flex items-center gap-1.5">© <span id="year"></span> Yukta S Viraktamath. Built with <i data-lucide="heart" class="w-3.5 h-3.5 text-rose-400 fill-rose-400"></i> and Tailwind CSS.</p>
           <p class="font-mono text-xs">CSIT · REVA University</p>
@@ -451,24 +577,18 @@
         else navbar.classList.remove('glass-strong', 'shadow-lg', 'shadow-black/20');
       });
 
-      // ===== Typing effect =====
-      const phrases = ['Full-Stack Developer', 'Algorithmic Problem Solver', 'Data Science Enthusiast', 'CSIT Undergrad @ REVA University'];
-      const typedEl = document.getElementById('typed');
-      let pi = 0, ci = 0, deleting = false;
-      function typeLoop() {
-        const word = phrases[pi];
-        if (!deleting) {
-          typedEl.textContent = word.slice(0, ci + 1);
-          ci++;
-          if (ci === word.length) { deleting = true; setTimeout(typeLoop, 1600); return; }
-        } else {
-          typedEl.textContent = word.slice(0, ci - 1);
-          ci--;
-          if (ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; }
+      // ===== Name typing effect =====
+      const fullName = 'Yukta S Viraktamath';
+      const typedNameEl = document.getElementById('typedName');
+      let nameIdx = 0;
+      function typeName() {
+        if (nameIdx <= fullName.length) {
+          typedNameEl.textContent = fullName.slice(0, nameIdx);
+          nameIdx++;
+          setTimeout(typeName, 85);
         }
-        setTimeout(typeLoop, deleting ? 45 : 80);
       }
-      typeLoop();
+      setTimeout(typeName, 400);
 
       // ===== Projects data =====
       const projects = [
@@ -704,6 +824,13 @@
         document.querySelectorAll('.reveal:not(.is-visible)').forEach(function (el) { revealObserver.observe(el); });
       }
       observeReveals();
+
+      // ===== Activities accordion =====
+      document.querySelectorAll('.act-toggle').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          btn.closest('.act-card').classList.toggle('open');
+        });
+      });
 
       // ===== Initial render =====
       renderProjects('all');
