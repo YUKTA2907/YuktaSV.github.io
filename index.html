@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Personal portfolio of Yukta S Viraktamath, a 3rd Semester B.Tech CSIT student at REVA University.">
-    <title>Yukta S Viraktamath | CSIT Student Portfolio</title>
+    <meta name="description" content="Personal portfolio of Yukta S Viraktamath, a B.Tech CSIT student at REVA University.">
+    <title>Yukta S Viraktamath | Portfolio</title>
 
     <style>
         * {
@@ -26,11 +26,18 @@
             --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
         }
 
+        html {
+            min-height: 100%;
+        }
+
         body {
+            min-height: 100vh;
+            width: 100%;
             font-family: "Inter", "Segoe UI", Arial, sans-serif;
             background: var(--bg);
             color: var(--dark);
             line-height: 1.7;
+            overflow-x: hidden;
         }
 
         a {
@@ -38,9 +45,14 @@
             color: inherit;
         }
 
+        .page-wrapper {
+            min-height: 100vh;
+            width: 100%;
+        }
+
         .container {
             width: min(1100px, 90%);
-            margin: auto;
+            margin: 0 auto;
         }
 
         /* Navigation */
@@ -48,9 +60,10 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            background: rgba(15, 23, 42, 0.96);
+            width: 100%;
+            background: rgba(15, 23, 42, 0.97);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255,255,255,0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .nav-container {
@@ -89,11 +102,15 @@
 
         /* Hero */
         .hero {
-            min-height: 88vh;
+            min-height: calc(100vh - 68px);
             display: flex;
             align-items: center;
             background:
-                radial-gradient(circle at 80% 20%, rgba(37, 99, 235, 0.18), transparent 30%),
+                radial-gradient(
+                    circle at 80% 20%,
+                    rgba(37, 99, 235, 0.18),
+                    transparent 30%
+                ),
                 linear-gradient(135deg, #0f172a, #1e293b);
             color: white;
             position: relative;
@@ -171,12 +188,13 @@
         }
 
         .btn-outline:hover {
-            background: rgba(255,255,255,0.08);
+            background: rgba(255, 255, 255, 0.08);
         }
 
         /* General Sections */
         section {
             padding: 90px 0;
+            width: 100%;
         }
 
         .section-heading {
@@ -205,7 +223,7 @@
 
         /* About */
         .about {
-            background: white;
+            background: var(--surface);
         }
 
         .about-grid {
@@ -240,10 +258,15 @@
         }
 
         /* Projects */
+        .projects {
+            background: var(--bg);
+        }
+
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 22px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            max-width: 850px;
         }
 
         .project-card {
@@ -253,7 +276,7 @@
             padding: 28px;
             display: flex;
             flex-direction: column;
-            min-height: 260px;
+            min-height: 280px;
             box-shadow: 0 5px 20px rgba(15, 23, 42, 0.04);
             transition: 0.3s ease;
         }
@@ -277,7 +300,7 @@
         }
 
         .project-card h3 {
-            font-size: 1.15rem;
+            font-size: 1.2rem;
             margin-bottom: 10px;
         }
 
@@ -288,6 +311,7 @@
         }
 
         .project-link {
+            display: inline-block;
             color: var(--accent);
             font-weight: 600;
             margin-top: 20px;
@@ -300,7 +324,7 @@
 
         /* Skills */
         .skills {
-            background: white;
+            background: var(--surface);
         }
 
         .skills-grid {
@@ -361,10 +385,12 @@
         .github-btn:hover {
             background: #1e293b;
             border-color: #64748b;
+            transform: translateY(-2px);
         }
 
         /* Footer */
         footer {
+            width: 100%;
             background: #020617;
             color: #64748b;
             text-align: center;
@@ -389,10 +415,11 @@
 
             .projects-grid {
                 grid-template-columns: 1fr;
+                max-width: 100%;
             }
 
             .hero {
-                min-height: 80vh;
+                min-height: calc(100vh - 68px);
             }
 
             section {
@@ -411,18 +438,24 @@
 
             .buttons {
                 flex-direction: column;
-                align-items: flex-start;
+                align-items: stretch;
             }
 
             .btn {
                 width: 100%;
                 text-align: center;
             }
+
+            .container {
+                width: 88%;
+            }
         }
     </style>
 </head>
 
 <body>
+
+<div class="page-wrapper">
 
     <!-- Navigation -->
     <nav>
@@ -439,12 +472,14 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero -->
     <header class="hero" id="home">
         <div class="container">
             <div class="hero-content">
 
-                <span class="eyebrow">B.Tech CSIT • REVA University</span>
+                <span class="eyebrow">
+                    B.Tech CSIT • REVA University
+                </span>
 
                 <h1>
                     Yukta S<br>
@@ -464,15 +499,20 @@
                 </p>
 
                 <div class="buttons">
-                    <a href="#projects" class="btn btn-primary">View My Work</a>
-                    <a href="#contact" class="btn btn-outline">Get In Touch</a>
+                    <a href="#projects" class="btn btn-primary">
+                        View My Work
+                    </a>
+
+                    <a href="#contact" class="btn btn-outline">
+                        Get In Touch
+                    </a>
                 </div>
 
             </div>
         </div>
     </header>
 
-    <!-- About Section -->
+    <!-- About -->
     <section class="about" id="about">
         <div class="container">
 
@@ -500,6 +540,7 @@
 
                 <div class="goal-card">
                     <h3>My Goal</h3>
+
                     <p>
                         To master full-stack software development fundamentals and
                         build efficient, scalable applications that solve
@@ -511,98 +552,84 @@
         </div>
     </section>
 
-    <!-- Projects Section -->
-    <section id="projects">
+    <!-- Projects -->
+    <section class="projects" id="projects">
         <div class="container">
 
             <div class="section-heading">
                 <div class="section-label">Projects & Activities</div>
+
                 <h2>What I'm building</h2>
+
                 <p>
-                    A collection of coding exercises, collaboration activities,
-                    and problem-solving practice that represent my development journey.
+                    A collection of coding exercises and problem-solving practice
+                    representing my current development and learning journey.
                 </p>
             </div>
 
             <div class="projects-grid">
 
-                <!-- Activity 1 -->
+                <!-- Hello World Repository -->
                 <article class="project-card">
+
                     <div class="project-number">01</div>
 
                     <h3>Hello World Repository</h3>
 
                     <p>
                         A foundational programming repository containing my initial
-                        coding exercises and introduction to version control,
-                        repositories, and collaborative development workflows.
+                        coding work and introduction to GitHub, repositories,
+                        version control, and development workflows.
                     </p>
 
                     <a
-                        href="https://github.com/Yukta-Viraktamath/hello-world"
+                        href="https://github.com/YUKTA2907/YuktaSV.github.io"
                         target="_blank"
                         rel="noopener noreferrer"
                         class="project-link"
                     >
                         View Repository →
                     </a>
+
                 </article>
 
-                <!-- Activities 2 & 3 -->
+                <!-- LeetCode Practice -->
                 <article class="project-card">
+
                     <div class="project-number">02</div>
-
-                    <h3>Pair-Programming Collaboration Log</h3>
-
-                    <p>
-                        Documentation of pair-programming activities focused on
-                        collaborative problem-solving, code review, communication,
-                        and working effectively with Git-based workflows.
-                    </p>
-
-                    <a
-                        href="https://github.com/Yukta-Viraktamath/pair-programming"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="project-link"
-                    >
-                        View Collaboration Log →
-                    </a>
-                </article>
-
-                <!-- Activity 4 -->
-                <article class="project-card">
-                    <div class="project-number">03</div>
 
                     <h3>LeetCode Practice & Solutions</h3>
 
                     <p>
-                        A growing collection of LeetCode solutions created to
-                        strengthen logical thinking, algorithmic problem-solving,
-                        data structures, and coding efficiency.
+                        A collection of coding practice focused on strengthening
+                        logical thinking, algorithmic problem-solving, data
+                        structures, and programming efficiency.
                     </p>
 
                     <a
-                        href="https://github.com/Yukta-Viraktamath/leetcode-solutions"
+                        href="https://github.com/YUKTA2907"
                         target="_blank"
                         rel="noopener noreferrer"
                         class="project-link"
                     >
-                        View Solutions →
+                        View GitHub Profile →
                     </a>
+
                 </article>
 
             </div>
         </div>
     </section>
 
-    <!-- Skills Section -->
+    <!-- Skills -->
     <section class="skills" id="skills">
         <div class="container">
 
             <div class="section-heading">
                 <div class="section-label">Technical Skills</div>
+
                 <h2>Tools & technologies</h2>
+
                 <p>
                     Technologies and development tools I am currently learning
                     and using throughout my academic and personal projects.
@@ -622,7 +649,7 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Contact -->
     <section class="contact" id="contact">
         <div class="container">
 
@@ -631,13 +658,12 @@
             <h2>Let's connect.</h2>
 
             <p>
-                Interested in my projects, coding journey, or collaboration?
-                Feel free to explore my GitHub repositories and follow along
-                as I continue learning and building.
+                Interested in my coding journey, projects, or future work?
+                Explore my GitHub profile to see what I'm learning and building.
             </p>
 
             <a
-                href="https://github.com/Yukta-Viraktamath"
+                href="https://github.com/YUKTA2907"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="github-btn"
@@ -655,6 +681,8 @@
             Built with HTML & CSS.
         </p>
     </footer>
+
+</div>
 
 </body>
 </html>
