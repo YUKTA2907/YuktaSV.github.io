@@ -1,688 +1,460 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Personal portfolio of Yukta S Viraktamath, a B.Tech CSIT student at REVA University.">
-    <title>Yukta S Viraktamath | Portfolio</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yukta V — Portfolio</title>
+    <meta property="og:title" content="Yukta V — Portfolio" />
+    <meta property="og:description" content="3rd Semester, B.Tech CSIT, REVA University" />
+    <meta property="og:image" content="https://bolt.new/static/og_default.png" />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
-
-        :root {
-            --bg: #f8fafc;
-            --surface: #ffffff;
-            --dark: #0f172a;
-            --slate: #334155;
-            --muted: #64748b;
-            --accent: #2563eb;
-            --accent-light: #dbeafe;
-            --border: #e2e8f0;
-            --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
-        }
-
-        html {
-            min-height: 100%;
-        }
-
-        body {
-            min-height: 100vh;
-            width: 100%;
-            font-family: "Inter", "Segoe UI", Arial, sans-serif;
-            background: var(--bg);
-            color: var(--dark);
-            line-height: 1.7;
-            overflow-x: hidden;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .page-wrapper {
-            min-height: 100vh;
-            width: 100%;
-        }
-
-        .container {
-            width: min(1100px, 90%);
-            margin: 0 auto;
-        }
-
-        /* Navigation */
-        nav {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            width: 100%;
-            background: rgba(15, 23, 42, 0.97);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .nav-container {
-            min-height: 68px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            color: white;
-            font-size: 1.25rem;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-
-        .logo span {
-            color: #60a5fa;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 28px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: #cbd5e1;
-            font-size: 0.92rem;
-            transition: 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: white;
-        }
-
-        /* Hero */
-        .hero {
-            min-height: calc(100vh - 68px);
-            display: flex;
-            align-items: center;
-            background:
-                radial-gradient(
-                    circle at 80% 20%,
-                    rgba(37, 99, 235, 0.18),
-                    transparent 30%
-                ),
-                linear-gradient(135deg, #0f172a, #1e293b);
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-content {
-            max-width: 800px;
-            padding: 80px 0;
-        }
-
-        .eyebrow {
-            display: inline-block;
-            padding: 7px 14px;
-            margin-bottom: 22px;
-            border: 1px solid rgba(147, 197, 253, 0.35);
-            border-radius: 50px;
-            color: #93c5fd;
-            background: rgba(37, 99, 235, 0.12);
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        .hero h1 {
-            font-size: clamp(2.7rem, 7vw, 5rem);
-            line-height: 1.08;
-            letter-spacing: -2px;
-            margin-bottom: 18px;
-        }
-
-        .hero h1 span {
-            color: #60a5fa;
-        }
-
-        .hero-subtitle {
-            color: #cbd5e1;
-            font-size: clamp(1rem, 2vw, 1.25rem);
-            max-width: 700px;
-            margin-bottom: 30px;
-        }
-
-        .hero-description {
-            color: #94a3b8;
-            max-width: 680px;
-            margin-bottom: 35px;
-        }
-
-        .buttons {
-            display: flex;
-            gap: 14px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 22px;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: 0.3s ease;
-        }
-
-        .btn-primary {
-            background: var(--accent);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #1d4ed8;
-            transform: translateY(-2px);
-        }
-
-        .btn-outline {
-            border: 1px solid #475569;
-            color: #e2e8f0;
-        }
-
-        .btn-outline:hover {
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        /* General Sections */
-        section {
-            padding: 90px 0;
-            width: 100%;
-        }
-
-        .section-heading {
-            margin-bottom: 45px;
-        }
-
-        .section-label {
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .section-heading h2 {
-            font-size: clamp(2rem, 4vw, 2.8rem);
-            letter-spacing: -1px;
-            margin-bottom: 10px;
-        }
-
-        .section-heading p {
-            color: var(--muted);
-            max-width: 650px;
-        }
-
-        /* About */
-        .about {
-            background: var(--surface);
-        }
-
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1.5fr 1fr;
-            gap: 55px;
-            align-items: start;
-        }
-
-        .about-text p {
-            color: var(--slate);
-            margin-bottom: 20px;
-            font-size: 1.05rem;
-        }
-
-        .goal-card {
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-left: 4px solid var(--accent);
-            border-radius: 12px;
-            padding: 28px;
-            box-shadow: var(--shadow);
-        }
-
-        .goal-card h3 {
-            margin-bottom: 12px;
-            font-size: 1.2rem;
-        }
-
-        .goal-card p {
-            color: var(--muted);
-        }
-
-        /* Projects */
-        .projects {
-            background: var(--bg);
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 24px;
-            max-width: 850px;
-        }
-
-        .project-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 28px;
-            display: flex;
-            flex-direction: column;
-            min-height: 280px;
-            box-shadow: 0 5px 20px rgba(15, 23, 42, 0.04);
-            transition: 0.3s ease;
-        }
-
-        .project-card:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow);
-            border-color: #bfdbfe;
-        }
-
-        .project-number {
-            width: 38px;
-            height: 38px;
-            display: grid;
-            place-items: center;
-            background: var(--accent-light);
-            color: var(--accent);
-            border-radius: 9px;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-
-        .project-card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-        }
-
-        .project-card p {
-            color: var(--muted);
-            font-size: 0.94rem;
-            flex-grow: 1;
-        }
-
-        .project-link {
-            display: inline-block;
-            color: var(--accent);
-            font-weight: 600;
-            margin-top: 20px;
-            font-size: 0.9rem;
-        }
-
-        .project-link:hover {
-            text-decoration: underline;
-        }
-
-        /* Skills */
-        .skills {
-            background: var(--surface);
-        }
-
-        .skills-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 14px;
-            max-width: 850px;
-        }
-
-        .skill {
-            padding: 12px 20px;
-            border: 1px solid var(--border);
-            border-radius: 50px;
-            background: #f8fafc;
-            color: var(--slate);
-            font-weight: 600;
-            transition: 0.3s ease;
-        }
-
-        .skill:hover {
-            background: var(--accent-light);
-            color: var(--accent);
-            border-color: #bfdbfe;
-            transform: translateY(-2px);
-        }
-
-        /* Contact */
-        .contact {
-            background: #0f172a;
-            color: white;
-            text-align: center;
-        }
-
-        .contact .section-label {
-            color: #60a5fa;
-        }
-
-        .contact h2 {
-            font-size: clamp(2rem, 4vw, 2.8rem);
-            margin-bottom: 12px;
-        }
-
-        .contact p {
-            color: #94a3b8;
-            max-width: 600px;
-            margin: 0 auto 28px;
-        }
-
-        .github-btn {
-            display: inline-block;
-            padding: 13px 24px;
-            border: 1px solid #475569;
-            border-radius: 8px;
-            color: white;
-            transition: 0.3s ease;
-        }
-
-        .github-btn:hover {
-            background: #1e293b;
-            border-color: #64748b;
-            transform: translateY(-2px);
-        }
-
-        /* Footer */
-        footer {
-            width: 100%;
-            background: #020617;
-            color: #64748b;
-            text-align: center;
-            padding: 24px 15px;
-            font-size: 0.85rem;
-        }
-
-        footer strong {
-            color: #cbd5e1;
-        }
-
-        /* Responsive */
-        @media (max-width: 800px) {
-            .nav-links {
-                display: none;
-            }
-
-            .about-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-                max-width: 100%;
-            }
-
-            .hero {
-                min-height: calc(100vh - 68px);
-            }
-
-            section {
-                padding: 70px 0;
-            }
-        }
-
-        @media (max-width: 500px) {
-            .hero h1 {
-                font-size: 2.6rem;
-            }
-
-            .hero-subtitle {
-                font-size: 1rem;
-            }
-
-            .buttons {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .btn {
-                width: 100%;
-                text-align: center;
-            }
-
-            .container {
-                width: 88%;
-            }
-        }
+      :root { color-scheme: dark; }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        min-height: 100vh;
+        background-color: #020617;
+        color: #e2e8f0;
+        font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        margin: 0;
+      }
+      .text-glow { text-shadow: 0 0 24px rgba(129, 140, 248, 0.45); }
+      .glass {
+        background: rgba(15, 23, 42, 0.55);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border: 1px solid rgba(99, 102, 241, 0.16);
+      }
+      .glass-hover {
+        transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease, box-shadow 0.35s ease;
+      }
+      .glass-hover:hover {
+        transform: translateY(-6px);
+        border-color: rgba(129, 140, 248, 0.45);
+        box-shadow: 0 18px 50px -20px rgba(99, 102, 241, 0.5);
+      }
+      .gradient-text {
+        background: linear-gradient(120deg, #818cf8 0%, #c4b5fd 50%, #a78bfa 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .glow-orb {
+        position: absolute;
+        border-radius: 9999px;
+        filter: blur(80px);
+        opacity: 0.5;
+        pointer-events: none;
+      }
+      @keyframes float-slow { 0%,100%{transform:translateY(0) translateX(0)} 50%{transform:translateY(-24px) translateX(12px)} }
+      @keyframes float-slow-rev { 0%,100%{transform:translateY(0) translateX(0)} 50%{transform:translateY(22px) translateX(-14px)} }
+      @keyframes fade-up { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+      .animate-float-slow { animation: float-slow 9s ease-in-out infinite; }
+      .animate-float-slow-rev { animation: float-slow-rev 11s ease-in-out infinite; }
+      .animate-fade-up { animation: fade-up 0.7s cubic-bezier(0.22,1,0.36,1) both; }
+      .reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
+      }
+      .reveal.is-visible { opacity: 1; transform: translateY(0); }
+      ::-webkit-scrollbar { width: 8px; }
+      ::-webkit-scrollbar-track { background: #020617; }
+      ::-webkit-scrollbar-thumb { background: #3730a3; border-radius: 4px; }
+      ::-webkit-scrollbar-thumb:hover { background: #4f46e5; }
     </style>
-</head>
-
-<body>
-
-<div class="page-wrapper">
-
-    <!-- Navigation -->
-    <nav>
-        <div class="container nav-container">
-            <a href="#home" class="logo">Yukta<span>.</span></a>
-
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent">
+      <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="relative flex items-center justify-center w-9 h-9 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 shadow-lg shadow-indigo-600/30">
+            <i data-lucide="terminal" class="w-5 h-5 text-white"></i>
+          </div>
+          <span class="font-semibold text-white text-lg tracking-tight hidden sm:block">Yukta<span class="text-indigo-400">.dev</span></span>
         </div>
-    </nav>
 
-    <!-- Hero -->
-    <header class="hero" id="home">
-        <div class="container">
-            <div class="hero-content">
-
-                <span class="eyebrow">
-                    B.Tech CSIT • REVA University
-                </span>
-
-                <h1>
-                    Yukta S<br>
-                    <span>Viraktamath</span>
-                </h1>
-
-                <p class="hero-subtitle">
-                    3rd Semester B.Tech CSIT Student at REVA University
-                    <br>
-                    Student ID: B25CS0311
-                </p>
-
-                <p class="hero-description">
-                    Exploring software development, computational problem-solving,
-                    data structures, and the fundamentals of building efficient
-                    and scalable applications.
-                </p>
-
-                <div class="buttons">
-                    <a href="#projects" class="btn btn-primary">
-                        View My Work
-                    </a>
-
-                    <a href="#contact" class="btn btn-outline">
-                        Get In Touch
-                    </a>
-                </div>
-
-            </div>
+        <div class="hidden md:flex items-center gap-1">
+          <button onclick="scrollToSection('home')" class="px-4 py-2 rounded-lg text-sm text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Home</button>
+          <button onclick="scrollToSection('about')" class="px-4 py-2 rounded-lg text-sm text-slate-300 hover:text-white hover:bg-white/5 transition-colors">About</button>
+          <button onclick="scrollToSection('projects')" class="px-4 py-2 rounded-lg text-sm text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Projects</button>
+          <button onclick="scrollToSection('skills')" class="px-4 py-2 rounded-lg text-sm text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Skills</button>
+          <a href="https://github.com/YUKTA2907" target="_blank" rel="noopener noreferrer" class="ml-1 inline-flex items-center justify-center w-9 h-9 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition-colors" aria-label="GitHub">
+            <i data-lucide="github" class="w-4 h-4"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/yukta-s-viraktamath-64a1293b4/" target="_blank" rel="noopener noreferrer" class="ml-1 inline-flex items-center justify-center w-9 h-9 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition-colors" aria-label="LinkedIn">
+            <i data-lucide="linkedin" class="w-4 h-4"></i>
+          </a>
+          <a href="https://github.com/YUKTA2907" target="_blank" rel="noopener noreferrer" class="ml-2 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium transition-colors">GitHub</a>
         </div>
+
+        <button id="menuBtn" class="md:hidden p-2 rounded-lg text-slate-200 hover:bg-white/5" aria-label="Toggle menu">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+      </nav>
+
+      <div id="mobileMenu" class="md:hidden glass border-t border-white/5 hidden">
+        <div class="px-6 py-4 flex flex-col gap-1">
+          <button onclick="scrollToSection('home'); closeMenu()" class="px-4 py-3 rounded-lg text-left text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Home</button>
+          <button onclick="scrollToSection('about'); closeMenu()" class="px-4 py-3 rounded-lg text-left text-slate-300 hover:text-white hover:bg-white/5 transition-colors">About</button>
+          <button onclick="scrollToSection('projects'); closeMenu()" class="px-4 py-3 rounded-lg text-left text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Projects</button>
+          <button onclick="scrollToSection('skills'); closeMenu()" class="px-4 py-3 rounded-lg text-left text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Skills</button>
+          <a href="https://www.linkedin.com/in/yukta-s-viraktamath-64a1293b4/" target="_blank" rel="noopener noreferrer" class="px-4 py-3 rounded-lg text-center text-slate-300 hover:text-white hover:bg-white/5 transition-colors inline-flex items-center justify-center gap-2">
+            <i data-lucide="linkedin" class="w-4 h-4"></i> LinkedIn
+          </a>
+          <a href="https://github.com/YUKTA2907" target="_blank" rel="noopener noreferrer" class="mt-2 px-4 py-3 rounded-lg bg-indigo-600 text-white text-center font-medium">GitHub Profile</a>
+        </div>
+      </div>
     </header>
 
-    <!-- About -->
-    <section class="about" id="about">
-        <div class="container">
+    <!-- Hero -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <div class="glow-orb w-[28rem] h-[28rem] bg-indigo-600 top-[-6rem] left-[-4rem] animate-float-slow"></div>
+      <div class="glow-orb w-[26rem] h-[26rem] bg-violet-600 bottom-[-5rem] right-[-3rem] animate-float-slow-rev"></div>
+      <div class="glow-orb w-[20rem] h-[20rem] bg-fuchsia-600 top-[40%] left-[55%] opacity-30 animate-float-slow"></div>
 
-            <div class="section-heading">
-                <div class="section-label">About Me</div>
-                <h2>Learning, building, and solving.</h2>
-            </div>
+      <div class="absolute inset-0 opacity-[0.05]" style="background-image: linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px); background-size: 48px 48px;"></div>
 
-            <div class="about-grid">
-
-                <div class="about-text">
-                    <p>
-                        I am a dedicated Computer Science and Information Technology
-                        undergraduate at REVA University with a strong passion for
-                        software development and computational problem-solving.
-                    </p>
-
-                    <p>
-                        Constantly curious about how technology works under the hood,
-                        I enjoy building foundational coding projects, collaborating
-                        with peers, and turning logical challenges into clean,
-                        functional solutions.
-                    </p>
-                </div>
-
-                <div class="goal-card">
-                    <h3>My Goal</h3>
-
-                    <p>
-                        To master full-stack software development fundamentals and
-                        build efficient, scalable applications that solve
-                        real-world problems.
-                    </p>
-                </div>
-
-            </div>
+      <div class="relative z-10 max-w-4xl mx-auto px-6 text-center pt-28 pb-20">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-sm text-indigo-300 mb-8 animate-fade-up">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+          </span>
+          Open to opportunities &amp; collaboration
         </div>
+
+        <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight mb-6 animate-fade-up" style="animation-delay:0.08s">
+          <span class="text-white">Hi, I'm </span>
+          <span class="gradient-text text-glow">Yukta V</span>
+        </h1>
+
+        <p class="text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto mb-3 animate-fade-up" style="animation-delay:0.16s">
+          3rd Semester · B.Tech CSIT · REVA University
+        </p>
+        <p class="text-sm text-slate-400 mb-10 animate-fade-up" style="animation-delay:0.2s">
+          Student ID: <span class="font-mono text-indigo-300">R25EJ179</span>
+        </p>
+
+        <div class="flex flex-wrap items-center justify-center gap-4 animate-fade-up" style="animation-delay:0.28s">
+          <button onclick="scrollToSection('projects')" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium shadow-lg shadow-indigo-600/30 transition-all duration-300 hover:shadow-indigo-500/50 hover:-translate-y-0.5">
+            <i data-lucide="code-2" class="w-4 h-4"></i> View Projects
+          </button>
+          <a href="https://github.com/YUKTA2907" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl glass glass-hover text-slate-200 font-medium">
+            <i data-lucide="github" class="w-4 h-4"></i> GitHub Profile
+          </a>
+          <a href="https://www.linkedin.com/in/yukta-s-viraktamath-64a1293b4/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl glass glass-hover text-slate-200 font-medium">
+            <i data-lucide="linkedin" class="w-4 h-4 text-[#6FA8DC]"></i> LinkedIn
+          </a>
+        </div>
+      </div>
+
+      <button onclick="scrollToSection('about')" aria-label="Scroll down" class="absolute bottom-8 left-1/2 -translate-x-1/2 text-slate-400 hover:text-indigo-300 transition-colors animate-bounce">
+        <i data-lucide="arrow-down" class="w-6 h-6"></i>
+      </button>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="relative max-w-6xl mx-auto px-6 py-24 md:py-32">
+      <div class="text-center mb-14 reveal">
+        <p class="text-indigo-400 font-medium text-sm uppercase tracking-widest mb-3">About Me</p>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white">
+          Turning curiosity into <span class="gradient-text">clean solutions</span>
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="reveal glass glass-hover rounded-2xl p-8">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="flex items-center justify-center w-11 h-11 rounded-xl bg-indigo-500/15 text-indigo-300">
+              <i data-lucide="sparkles" class="w-5 h-5"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-white">Who I Am</h3>
+          </div>
+          <p class="text-slate-300 leading-relaxed">
+            I am a dedicated Computer Science and Information Technology undergraduate at REVA University with a strong passion for software development and computational problem-solving. Constantly curious about how technology works under the hood, I enjoy building foundational coding projects, collaborating with peers, and turning logical challenges into clean, functional solutions.
+          </p>
+        </div>
+
+        <div class="reveal glass glass-hover rounded-2xl p-8" style="transition-delay:0.1s">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="flex items-center justify-center w-11 h-11 rounded-xl bg-violet-500/15 text-violet-300">
+              <i data-lucide="target" class="w-5 h-5"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-white">My Goal</h3>
+          </div>
+          <p class="text-slate-300 leading-relaxed">
+            To master full-stack software development fundamentals and build efficient, scalable applications that solve real-world problems.
+          </p>
+        </div>
+      </div>
+
+      <div class="reveal mt-6 grid sm:grid-cols-3 gap-4">
+        <div class="glass rounded-xl p-5 flex items-center gap-4">
+          <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-white/5 text-indigo-300">
+            <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <p class="text-xs text-slate-400 uppercase tracking-wide">Institution</p>
+            <p class="text-white font-medium">REVA University</p>
+          </div>
+        </div>
+        <div class="glass rounded-xl p-5 flex items-center gap-4">
+          <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-white/5 text-indigo-300">
+            <i data-lucide="target" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <p class="text-xs text-slate-400 uppercase tracking-wide">Program</p>
+            <p class="text-white font-medium">B.Tech CSIT · 3rd Sem</p>
+          </div>
+        </div>
+        <div class="glass rounded-xl p-5 flex items-center gap-4">
+          <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-white/5 text-indigo-300">
+            <i data-lucide="sparkles" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <p class="text-xs text-slate-400 uppercase tracking-wide">Student ID</p>
+            <p class="text-white font-medium">R25EJ179</p>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Projects -->
-    <section class="projects" id="projects">
-        <div class="container">
+    <section id="projects" class="relative max-w-6xl mx-auto px-6 py-24 md:py-32">
+      <div class="text-center mb-14 reveal">
+        <p class="text-indigo-400 font-medium text-sm uppercase tracking-widest mb-3">Projects &amp; Activities</p>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white">
+          Things I'm <span class="gradient-text">building</span>
+        </h2>
+      </div>
 
-            <div class="section-heading">
-                <div class="section-label">Projects & Activities</div>
+      <div class="grid sm:grid-cols-2 gap-6">
+        <!-- Project 1 -->
+        <article class="reveal group glass glass-hover rounded-2xl p-7 flex flex-col" style="transition-delay:0s">
+          <div class="flex items-center justify-center w-12 h-12 rounded-xl mb-5 text-indigo-300 bg-indigo-500/15">
+            <i data-lucide="folder-git-2" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-3 group-hover:text-indigo-200 transition-colors">Hello World &amp; Setup Workspace</h3>
+          <p class="text-slate-300 leading-relaxed text-[0.95rem] mb-4">Activity 1 &amp; 2 — Configured development environments and tracked core setup files for an organized, reproducible workspace.</p>
+          <div class="mb-5 rounded-lg bg-black/30 border border-white/5 px-4 py-3">
+            <p class="flex items-center gap-1.5 text-[0.7rem] uppercase tracking-wide text-slate-500 mb-1">
+              <i data-lucide="map-pin" class="w-3 h-3"></i> Local path
+            </p>
+            <p class="font-mono text-xs text-slate-400 break-all">C:\Users\Admin\OneDrive\Desktop\Portfolio develpment</p>
+          </div>
+          <a href="https://github.com/YUKTA2907/YuktaSV.github.io" target="_blank" rel="noopener noreferrer" class="mt-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-white/5 hover:bg-indigo-600 text-slate-200 hover:text-white border border-white/10 hover:border-indigo-500 text-sm font-medium transition-all duration-300">
+            <i data-lucide="github" class="w-4 h-4"></i> View Repository
+          </a>
+        </article>
 
-                <h2>What I'm building</h2>
+        <!-- Project 2 -->
+        <article class="reveal group glass glass-hover rounded-2xl p-7 flex flex-col" style="transition-delay:0.08s">
+          <div class="flex items-center justify-center w-12 h-12 rounded-xl mb-5 text-emerald-300 bg-emerald-500/15">
+            <i data-lucide="code-2" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-3 group-hover:text-indigo-200 transition-colors">LeetCode Practice &amp; Solutions</h3>
+          <p class="text-slate-300 leading-relaxed text-[0.95rem] mb-4">Activity 4 — Dedicated repository tracking daily coding solutions, patterns, and problem-solving progress over time.</p>
+          <div class="mb-5 rounded-lg bg-black/30 border border-white/5 px-4 py-3">
+            <p class="flex items-center gap-1.5 text-[0.7rem] uppercase tracking-wide text-slate-500 mb-1">
+              <i data-lucide="map-pin" class="w-3 h-3"></i> Local path
+            </p>
+            <p class="font-mono text-xs text-slate-400 break-all">C:\Users\Admin\OneDrive\Documents\GitHub\leetcode-solutions</p>
+          </div>
+          <a href="https://github.com/YUKTA2907" target="_blank" rel="noopener noreferrer" class="mt-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-white/5 hover:bg-indigo-600 text-slate-200 hover:text-white border border-white/10 hover:border-indigo-500 text-sm font-medium transition-all duration-300">
+            <i data-lucide="github" class="w-4 h-4"></i> View Repository
+          </a>
+        </article>
 
-                <p>
-                    A collection of coding exercises and problem-solving practice
-                    representing my current development and learning journey.
-                </p>
-            </div>
+        <!-- Project 3 -->
+        <article class="reveal group glass glass-hover rounded-2xl p-7 flex flex-col" style="transition-delay:0.16s">
+          <div class="flex items-center justify-center w-12 h-12 rounded-xl mb-5 text-amber-300 bg-amber-500/15">
+            <i data-lucide="trophy" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-3 group-hover:text-indigo-200 transition-colors">HackerRank Problem Solving</h3>
+          <p class="text-slate-300 leading-relaxed text-[0.95rem] mb-4">Documented algorithmic practice and achievements — sharpening data structures, logic, and competitive coding skills.</p>
+          <div class="mb-5 rounded-lg bg-black/30 border border-white/5 px-4 py-3">
+            <p class="flex items-center gap-1.5 text-[0.7rem] uppercase tracking-wide text-slate-500 mb-1">
+              <i data-lucide="map-pin" class="w-3 h-3"></i> Local path
+            </p>
+            <p class="font-mono text-xs text-slate-400 break-all">C:\Users\Admin\OneDrive\Desktop\Portfolio develpment\HackerRank-3rdSem-R25EJ179</p>
+          </div>
+          <a href="https://github.com/YUKTA2907" target="_blank" rel="noopener noreferrer" class="mt-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-white/5 hover:bg-indigo-600 text-slate-200 hover:text-white border border-white/10 hover:border-indigo-500 text-sm font-medium transition-all duration-300">
+            <i data-lucide="github" class="w-4 h-4"></i> View Repository
+          </a>
+        </article>
 
-            <div class="projects-grid">
-
-                <!-- Hello World Repository -->
-                <article class="project-card">
-
-                    <div class="project-number">01</div>
-
-                    <h3>Hello World Repository</h3>
-
-                    <p>
-                        A foundational programming repository containing my initial
-                        coding work and introduction to GitHub, repositories,
-                        version control, and development workflows.
-                    </p>
-
-                    <a
-                        href="https://github.com/YUKTA2907/YuktaSV.github.io"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="project-link"
-                    >
-                        View Repository →
-                    </a>
-
-                </article>
-
-                <!-- LeetCode Practice -->
-                <article class="project-card">
-
-                    <div class="project-number">02</div>
-
-                    <h3>LeetCode Practice & Solutions</h3>
-
-                    <p>
-                        A collection of coding practice focused on strengthening
-                        logical thinking, algorithmic problem-solving, data
-                        structures, and programming efficiency.
-                    </p>
-
-                    <a
-                        href="https://github.com/YUKTA2907"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="project-link"
-                    >
-                        View GitHub Profile →
-                    </a>
-
-                </article>
-
-            </div>
-        </div>
+        <!-- Project 4 -->
+        <article class="reveal group glass glass-hover rounded-2xl p-7 flex flex-col" style="transition-delay:0.24s">
+          <div class="flex items-center justify-center w-12 h-12 rounded-xl mb-5 text-fuchsia-300 bg-fuchsia-500/15">
+            <i data-lucide="images" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-3 group-hover:text-indigo-200 transition-colors">Activity Screenshots &amp; Assets</h3>
+          <p class="text-slate-300 leading-relaxed text-[0.95rem] mb-4">Curated collection of activity screenshots and reference assets maintained for documentation and review.</p>
+          <div class="mb-5 rounded-lg bg-black/30 border border-white/5 px-4 py-3">
+            <p class="flex items-center gap-1.5 text-[0.7rem] uppercase tracking-wide text-slate-500 mb-1">
+              <i data-lucide="map-pin" class="w-3 h-3"></i> Local directory
+            </p>
+            <p class="font-mono text-xs text-slate-400 break-all">C:\Users\Admin\OneDrive\Desktop\Portfolio develpment\Acitvites sc</p>
+          </div>
+          <a href="https://github.com/YUKTA2907" target="_blank" rel="noopener noreferrer" class="mt-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-white/5 hover:bg-indigo-600 text-slate-200 hover:text-white border border-white/10 hover:border-indigo-500 text-sm font-medium transition-all duration-300">
+            <i data-lucide="github" class="w-4 h-4"></i> View Repository
+          </a>
+        </article>
+      </div>
     </section>
 
     <!-- Skills -->
-    <section class="skills" id="skills">
-        <div class="container">
+    <section id="skills" class="relative max-w-6xl mx-auto px-6 py-24 md:py-32">
+      <div class="text-center mb-14 reveal">
+        <p class="text-indigo-400 font-medium text-sm uppercase tracking-widest mb-3">Skills</p>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white">
+          My <span class="gradient-text">toolkit</span>
+        </h2>
+      </div>
 
-            <div class="section-heading">
-                <div class="section-label">Technical Skills</div>
-
-                <h2>Tools & technologies</h2>
-
-                <p>
-                    Technologies and development tools I am currently learning
-                    and using throughout my academic and personal projects.
-                </p>
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Languages -->
+        <div class="reveal glass glass-hover rounded-2xl p-7" style="transition-delay:0s">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-br from-indigo-500 to-blue-600 shadow-lg">
+              <i data-lucide="cpu" class="w-5 h-5 text-white"></i>
             </div>
+            <h3 class="text-lg font-semibold text-white">Languages &amp; Core Concepts</h3>
+          </div>
+          <div class="flex flex-wrap gap-3">
+            <span class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-200 text-sm font-medium hover:border-indigo-400/50 hover:bg-indigo-500/10 hover:text-white transition-all duration-300 hover:-translate-y-0.5"><i data-lucide="code-2" class="w-4 h-4 text-indigo-300"></i> C</span>
+            <span class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-200 text-sm font-medium hover:border-indigo-400/50 hover:bg-indigo-500/10 hover:text-white transition-all duration-300 hover:-translate-y-0.5"><i data-lucide="file-code-2" class="w-4 h-4 text-indigo-300"></i> Python</span>
+            <span class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-200 text-sm font-medium hover:border-indigo-400/50 hover:bg-indigo-500/10 hover:text-white transition-all duration-300 hover:-translate-y-0.5"><i data-lucide="database" class="w-4 h-4 text-indigo-300"></i> Data Structures &amp; Algorithms</span>
+            <span class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-200 text-sm font-medium hover:border-indigo-400/50 hover:bg-indigo-500/10 hover:text-white transition-all duration-300 hover:-translate-y-0.5"><i data-lucide="brain" class="w-4 h-4 text-indigo-300"></i> Problem Solving</span>
+          </div>
+        </div>
 
-            <div class="skills-grid">
-                <span class="skill">C</span>
-                <span class="skill">Python</span>
-                <span class="skill">Data Structures & Algorithms</span>
-                <span class="skill">Git</span>
-                <span class="skill">GitHub</span>
-                <span class="skill">VS Code</span>
-                <span class="skill">GitLens</span>
+        <!-- Tools -->
+        <div class="reveal glass glass-hover rounded-2xl p-7" style="transition-delay:0.1s">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-br from-violet-500 to-fuchsia-600 shadow-lg">
+              <i data-lucide="wrench" class="w-5 h-5 text-white"></i>
             </div>
-
+            <h3 class="text-lg font-semibold text-white">Tools &amp; Platforms</h3>
+          </div>
+          <div class="flex flex-wrap gap-3">
+            <span class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-200 text-sm font-medium hover:border-indigo-400/50 hover:bg-indigo-500/10 hover:text-white transition-all duration-300 hover:-translate-y-0.5"><i data-lucide="git-branch" class="w-4 h-4 text-indigo-300"></i> Git</span>
+            <span class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-200 text-sm font-medium hover:border-indigo-400/50 hover:bg-indigo-500/10 hover:text-white transition-all duration-300 hover:-translate-y-0.5"><i data-lucide="github" class="w-4 h-4 text-indigo-300"></i> GitHub</span>
+            <span class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-200 text-sm font-medium hover:border-indigo-400/50 hover:bg-indigo-500/10 hover:text-white transition-all duration-300 hover:-translate-y-0.5"><i data-lucide="file-code-2" class="w-4 h-4 text-indigo-300"></i> VS Code</span>
+            <span class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-200 text-sm font-medium hover:border-indigo-400/50 hover:bg-indigo-500/10 hover:text-white transition-all duration-300 hover:-translate-y-0.5"><i data-lucide="boxes" class="w-4 h-4 text-indigo-300"></i> GitLens</span>
+            <span class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-200 text-sm font-medium hover:border-indigo-400/50 hover:bg-indigo-500/10 hover:text-white transition-all duration-300 hover:-translate-y-0.5"><i data-lucide="trophy" class="w-4 h-4 text-indigo-300"></i> HackerRank</span>
+          </div>
         </div>
-    </section>
-
-    <!-- Contact -->
-    <section class="contact" id="contact">
-        <div class="container">
-
-            <div class="section-label">Contact</div>
-
-            <h2>Let's connect.</h2>
-
-            <p>
-                Interested in my coding journey, projects, or future work?
-                Explore my GitHub profile to see what I'm learning and building.
-            </p>
-
-            <a
-                href="https://github.com/YUKTA2907"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="github-btn"
-            >
-                Visit My GitHub ↗
-            </a>
-
-        </div>
+      </div>
     </section>
 
     <!-- Footer -->
-    <footer>
-        <p>
-            © 2026 <strong>Yukta S Viraktamath</strong>.
-            Built with HTML & CSS.
-        </p>
+    <footer class="relative border-t border-white/5 mt-10">
+      <div class="max-w-6xl mx-auto px-6 py-12">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div class="text-center md:text-left">
+            <p class="text-white font-semibold text-lg">Yukta V</p>
+            <p class="text-slate-400 text-sm mt-1">
+              B.Tech CSIT · REVA University · Student ID <span class="font-mono text-indigo-300">R25EJ179</span>
+            </p>
+          </div>
+          <div class="flex items-center gap-4">
+            <a href="https://github.com/YUKTA2907" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl glass glass-hover text-slate-200 text-sm font-medium">
+              <i data-lucide="github" class="w-4 h-4"></i> GitHub
+            </a>
+            <a href="https://www.linkedin.com/in/yukta-s-viraktamath-64a1293b4/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl glass glass-hover text-slate-200 text-sm font-medium">
+              <i data-lucide="linkedin" class="w-4 h-4 text-[#6FA8DC]"></i> LinkedIn
+            </a>
+            <button onclick="scrollToSection('home')" class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white transition-colors" aria-label="Back to top">
+              <i data-lucide="arrow-up" class="w-5 h-5"></i>
+            </button>
+          </div>
+        </div>
+        <div class="mt-8 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-slate-500">
+          <p class="flex items-center gap-1.5">
+            © <span id="year"></span> Yukta V. Built with
+            <i data-lucide="heart" class="w-3.5 h-3.5 text-rose-400 fill-rose-400"></i>
+            and care.
+          </p>
+          <p class="font-mono text-xs">R25EJ179</p>
+        </div>
+      </div>
     </footer>
 
-</div>
+    <script>
+      // Init Lucide icons
+      lucide.createIcons();
 
-</body>
+      // Current year
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // Smooth scroll
+      function scrollToSection(id) {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      // Mobile menu
+      const menuBtn = document.getElementById('menuBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+      let menuOpen = false;
+
+      menuBtn.addEventListener('click', function () {
+        menuOpen = !menuOpen;
+        mobileMenu.classList.toggle('hidden', !menuOpen);
+        menuBtn.innerHTML = menuOpen
+          ? '<i data-lucide="x" class="w-5 h-5"></i>'
+          : '<i data-lucide="menu" class="w-5 h-5"></i>';
+        lucide.createIcons();
+      });
+
+      function closeMenu() {
+        menuOpen = false;
+        mobileMenu.classList.add('hidden');
+        menuBtn.innerHTML = '<i data-lucide="menu" class="w-5 h-5"></i>';
+        lucide.createIcons();
+      }
+
+      // Navbar scroll effect
+      const navbar = document.getElementById('navbar');
+      window.addEventListener('scroll', function () {
+        if (window.scrollY > 24) {
+          navbar.classList.add('glass', 'shadow-lg', 'shadow-black/20');
+        } else {
+          navbar.classList.remove('glass', 'shadow-lg', 'shadow-black/20');
+        }
+      });
+
+      // Scroll reveal animations
+      const observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: '0px 0px -60px 0px' }
+      );
+      document.querySelectorAll('.reveal').forEach(function (el) {
+        observer.observe(el);
+      });
+    </script>
+  </body>
 </html>
