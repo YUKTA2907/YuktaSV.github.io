@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Personal portfolio of Yukta S Viraktamath, a 3rd Semester B.Tech CSIT student at REVA University.">
+    <title>Yukta S Viraktamath | CSIT Student Portfolio</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --bg: #f8fafc;
+            --surface: #ffffff;
+            --dark: #0f172a;
+            --slate: #334155;
+            --muted: #64748b;
+            --accent: #2563eb;
+            --accent-light: #dbeafe;
+            --border: #e2e8f0;
+            --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+        }
+
+        body {
+            font-family: "Inter", "Segoe UI", Arial, sans-serif;
+            background: var(--bg);
+            color: var(--dark);
+            line-height: 1.7;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: min(1100px, 90%);
+            margin: auto;
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.96);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .nav-container {
+            min-height: 68px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .logo span {
+            color: #60a5fa;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #cbd5e1;
+            font-size: 0.92rem;
+            transition: 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 88vh;
+            display: flex;
+            align-items: center;
+            background:
+                radial-gradient(circle at 80% 20%, rgba(37, 99, 235, 0.18), transparent 30%),
+                linear-gradient(135deg, #0f172a, #1e293b);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 80px 0;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            padding: 7px 14px;
+            margin-bottom: 22px;
+            border: 1px solid rgba(147, 197, 253, 0.35);
+            border-radius: 50px;
+            color: #93c5fd;
+            background: rgba(37, 99, 235, 0.12);
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.7rem, 7vw, 5rem);
+            line-height: 1.08;
+            letter-spacing: -2px;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 span {
+            color: #60a5fa;
+        }
+
+        .hero-subtitle {
+            color: #cbd5e1;
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            max-width: 700px;
+            margin-bottom: 30px;
+        }
+
+        .hero-description {
+            color: #94a3b8;
+            max-width: 680px;
+            margin-bottom: 35px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            border: 1px solid #475569;
+            color: #e2e8f0;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.08);
+        }
+
+        /* General Sections */
+        section {
+            padding: 90px 0;
+        }
+
+        .section-heading {
+            margin-bottom: 45px;
+        }
+
+        .section-label {
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .section-heading h2 {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            letter-spacing: -1px;
+            margin-bottom: 10px;
+        }
+
+        .section-heading p {
+            color: var(--muted);
+            max-width: 650px;
+        }
+
+        /* About */
+        .about {
+            background: white;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 55px;
+            align-items: start;
+        }
+
+        .about-text p {
+            color: var(--slate);
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+
+        .goal-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--accent);
+            border-radius: 12px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+        }
+
+        .goal-card h3 {
+            margin-bottom: 12px;
+            font-size: 1.2rem;
+        }
+
+        .goal-card p {
+            color: var(--muted);
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .project-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            min-height: 260px;
+            box-shadow: 0 5px 20px rgba(15, 23, 42, 0.04);
+            transition: 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow);
+            border-color: #bfdbfe;
+        }
+
+        .project-number {
+            width: 38px;
+            height: 38px;
+            display: grid;
+            place-items: center;
+            background: var(--accent-light);
+            color: var(--accent);
+            border-radius: 9px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .project-card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 10px;
+        }
+
+        .project-card p {
+            color: var(--muted);
+            font-size: 0.94rem;
+            flex-grow: 1;
+        }
+
+        .project-link {
+            color: var(--accent);
+            font-weight: 600;
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+
+        .project-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Skills */
+        .skills {
+            background: white;
+        }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            max-width: 850px;
+        }
+
+        .skill {
+            padding: 12px 20px;
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            background: #f8fafc;
+            color: var(--slate);
+            font-weight: 600;
+            transition: 0.3s ease;
+        }
+
+        .skill:hover {
+            background: var(--accent-light);
+            color: var(--accent);
+            border-color: #bfdbfe;
+            transform: translateY(-2px);
+        }
+
+        /* Contact */
+        .contact {
+            background: #0f172a;
+            color: white;
+            text-align: center;
+        }
+
+        .contact .section-label {
+            color: #60a5fa;
+        }
+
+        .contact h2 {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            margin-bottom: 12px;
+        }
+
+        .contact p {
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto 28px;
+        }
+
+        .github-btn {
+            display: inline-block;
+            padding: 13px 24px;
+            border: 1px solid #475569;
+            border-radius: 8px;
+            color: white;
+            transition: 0.3s ease;
+        }
+
+        .github-btn:hover {
+            background: #1e293b;
+            border-color: #64748b;
+        }
+
+        /* Footer */
+        footer {
+            background: #020617;
+            color: #64748b;
+            text-align: center;
+            padding: 24px 15px;
+            font-size: 0.85rem;
+        }
+
+        footer strong {
+            color: #cbd5e1;
+        }
+
+        /* Responsive */
+        @media (max-width: 800px) {
+            .nav-links {
+                display: none;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                min-height: 80vh;
+            }
+
+            section {
+                padding: 70px 0;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .hero h1 {
+                font-size: 2.6rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .buttons {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <a href="#home" class="logo">Yukta<span>.</span></a>
+
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+
+                <span class="eyebrow">B.Tech CSIT • REVA University</span>
+
+                <h1>
+                    Yukta S<br>
+                    <span>Viraktamath</span>
+                </h1>
+
+                <p class="hero-subtitle">
+                    3rd Semester B.Tech CSIT Student at REVA University
+                    <br>
+                    Student ID: B25CS0311
+                </p>
+
+                <p class="hero-description">
+                    Exploring software development, computational problem-solving,
+                    data structures, and the fundamentals of building efficient
+                    and scalable applications.
+                </p>
+
+                <div class="buttons">
+                    <a href="#projects" class="btn btn-primary">View My Work</a>
+                    <a href="#contact" class="btn btn-outline">Get In Touch</a>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+
+            <div class="section-heading">
+                <div class="section-label">About Me</div>
+                <h2>Learning, building, and solving.</h2>
+            </div>
+
+            <div class="about-grid">
+
+                <div class="about-text">
+                    <p>
+                        I am a dedicated Computer Science and Information Technology
+                        undergraduate at REVA University with a strong passion for
+                        software development and computational problem-solving.
+                    </p>
+
+                    <p>
+                        Constantly curious about how technology works under the hood,
+                        I enjoy building foundational coding projects, collaborating
+                        with peers, and turning logical challenges into clean,
+                        functional solutions.
+                    </p>
+                </div>
+
+                <div class="goal-card">
+                    <h3>My Goal</h3>
+                    <p>
+                        To master full-stack software development fundamentals and
+                        build efficient, scalable applications that solve
+                        real-world problems.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+
+            <div class="section-heading">
+                <div class="section-label">Projects & Activities</div>
+                <h2>What I'm building</h2>
+                <p>
+                    A collection of coding exercises, collaboration activities,
+                    and problem-solving practice that represent my development journey.
+                </p>
+            </div>
+
+            <div class="projects-grid">
+
+                <!-- Activity 1 -->
+                <article class="project-card">
+                    <div class="project-number">01</div>
+
+                    <h3>Hello World Repository</h3>
+
+                    <p>
+                        A foundational programming repository containing my initial
+                        coding exercises and introduction to version control,
+                        repositories, and collaborative development workflows.
+                    </p>
+
+                    <a
+                        href="https://github.com/Yukta-Viraktamath/hello-world"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="project-link"
+                    >
+                        View Repository →
+                    </a>
+                </article>
+
+                <!-- Activities 2 & 3 -->
+                <article class="project-card">
+                    <div class="project-number">02</div>
+
+                    <h3>Pair-Programming Collaboration Log</h3>
+
+                    <p>
+                        Documentation of pair-programming activities focused on
+                        collaborative problem-solving, code review, communication,
+                        and working effectively with Git-based workflows.
+                    </p>
+
+                    <a
+                        href="https://github.com/Yukta-Viraktamath/pair-programming"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="project-link"
+                    >
+                        View Collaboration Log →
+                    </a>
+                </article>
+
+                <!-- Activity 4 -->
+                <article class="project-card">
+                    <div class="project-number">03</div>
+
+                    <h3>LeetCode Practice & Solutions</h3>
+
+                    <p>
+                        A growing collection of LeetCode solutions created to
+                        strengthen logical thinking, algorithmic problem-solving,
+                        data structures, and coding efficiency.
+                    </p>
+
+                    <a
+                        href="https://github.com/Yukta-Viraktamath/leetcode-solutions"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="project-link"
+                    >
+                        View Solutions →
+                    </a>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills" id="skills">
+        <div class="container">
+
+            <div class="section-heading">
+                <div class="section-label">Technical Skills</div>
+                <h2>Tools & technologies</h2>
+                <p>
+                    Technologies and development tools I am currently learning
+                    and using throughout my academic and personal projects.
+                </p>
+            </div>
+
+            <div class="skills-grid">
+                <span class="skill">C</span>
+                <span class="skill">Python</span>
+                <span class="skill">Data Structures & Algorithms</span>
+                <span class="skill">Git</span>
+                <span class="skill">GitHub</span>
+                <span class="skill">VS Code</span>
+                <span class="skill">GitLens</span>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+
+            <div class="section-label">Contact</div>
+
+            <h2>Let's connect.</h2>
+
+            <p>
+                Interested in my projects, coding journey, or collaboration?
+                Feel free to explore my GitHub repositories and follow along
+                as I continue learning and building.
+            </p>
+
+            <a
+                href="https://github.com/Yukta-Viraktamath"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="github-btn"
+            >
+                Visit My GitHub ↗
+            </a>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>
+            © 2026 <strong>Yukta S Viraktamath</strong>.
+            Built with HTML & CSS.
+        </p>
+    </footer>
+
+</body>
+</html>
