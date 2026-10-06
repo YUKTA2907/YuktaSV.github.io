@@ -1,0 +1,2115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0a0f0d" />
+  <meta name="description" content="Yukta S Viraktamath — CSIT Student and Aspiring Software Developer building programming fundamentals and problem-solving experience." />
+  <meta property="og:title" content="Yukta S Viraktamath — CSIT Student & Aspiring Software Developer" />
+  <meta property="og:description" content="CSIT Student · Aspiring Software Developer · Problem Solver" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <title>Yukta S Viraktamath — CSIT Student & Aspiring Software Developer</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0a0f0d;
+      --panel: rgba(17, 24, 21, 0.62);
+      --line: rgba(255, 255, 255, 0.1);
+      --muted: #94a3b8;
+      --green: #10b981;
+      --cyan: #06b6d4;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: #e6f0ed;
+      font-family: Inter, sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    #bgCanvas {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .wrap {
+      max-width: 1152px;
+      margin: auto;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    .glass {
+      background: var(--panel);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.12);
+    }
+
+    .gradient {
+      background: linear-gradient(120deg, #34d399, #06b6d4);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .glow {
+      text-shadow: 0 0 30px rgba(16, 185, 129, 0.4);
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 20;
+      transition: 0.3s;
+    }
+
+    header.scrolled {
+      background: rgba(13, 20, 17, 0.88);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+    }
+
+    nav {
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      background: linear-gradient(135deg, var(--green), #0891b2);
+      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.25);
+    }
+
+    .brand span span {
+      color: #6ee7b7;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 3px;
+      align-items: center;
+    }
+
+    .nav-links button,
+    .mobile-menu button {
+      color: #cbd5e1;
+      background: transparent;
+      border: 0;
+      padding: 9px 12px;
+      border-radius: 9px;
+      font-size: 13px;
+      transition: 0.2s;
+    }
+
+    .nav-links button:hover,
+    .mobile-menu button:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .social-mini {
+      display: flex;
+      gap: 4px;
+      margin-left: 8px;
+      padding-left: 10px;
+      border-left: 1px solid var(--line);
+    }
+
+    .icon-btn {
+      display: grid;
+      place-items: center;
+      width: 35px;
+      height: 35px;
+      border-radius: 9px;
+      color: #cbd5e1;
+      background: transparent;
+      transition: 0.2s;
+    }
+
+    .icon-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+    }
+
+    .menu-btn {
+      display: none;
+      background: transparent;
+      border: 0;
+      color: #e2e8f0;
+    }
+
+    .mobile-menu {
+      display: none;
+      padding: 12px 24px 18px;
+      background: rgba(13, 20, 17, 0.95);
+      border-top: 1px solid var(--line);
+    }
+
+    section {
+      scroll-margin-top: 76px;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.2;
+      pointer-events: none;
+    }
+
+    .orb.one {
+      width: 460px;
+      height: 460px;
+      background: #059669;
+      left: -130px;
+      top: -100px;
+      animation: float 10s ease-in-out infinite;
+    }
+
+    .orb.two {
+      width: 400px;
+      height: 400px;
+      background: #0891b2;
+      right: -130px;
+      bottom: -100px;
+      animation: float 12s ease-in-out infinite reverse;
+    }
+
+    .hero-content {
+      position: relative;
+      padding: 130px 0 70px;
+      max-width: 900px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      border: 1px solid rgba(52, 211, 153, 0.24);
+      border-radius: 999px;
+      padding: 8px 15px;
+      color: #6ee7b7;
+      background: rgba(16, 185, 129, 0.08);
+      font-size: 13px;
+    }
+
+    .pulse {
+      width: 8px;
+      height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+      box-shadow: 0 0 0 6px rgba(16, 185, 129, 0.15);
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 7vw, 5.8rem);
+      line-height: 1.05;
+      letter-spacing: -0.06em;
+      margin: 28px 0 20px;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+      margin: 8px 0 0;
+    }
+
+    h3 {
+      margin: 0;
+      color: #fff;
+    }
+
+    .hero p {
+      color: #cbd5e1;
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      margin: 0;
+    }
+
+    .subtle {
+      font-size: 14px !important;
+      color: #94a3b8 !important;
+      margin-top: 18px !important;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 34px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 17px;
+      border-radius: 11px;
+      border: 1px solid var(--line);
+      font-size: 14px;
+      font-weight: 600;
+      transition:
+        transform 0.2s,
+        background 0.2s,
+        border-color 0.2s,
+        box-shadow 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: #059669;
+      border-color: #10b981;
+      color: #fff;
+      box-shadow: 0 10px 24px rgba(16, 185, 129, 0.22);
+    }
+
+    .btn-primary:hover {
+      background: #10b981;
+    }
+
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.05);
+      color: #e2e8f0;
+    }
+
+    .btn-ghost:hover {
+      border-color: rgba(52, 211, 153, 0.5);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .scroll-cue {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      color: #94a3b8;
+      animation: bounce 2s infinite;
+    }
+
+    .section {
+      padding: 112px 0;
+    }
+
+    .section-head {
+      text-align: center;
+      margin-bottom: 46px;
+    }
+
+    .kicker {
+      color: #34d399;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .section-head p:last-child {
+      color: #94a3b8;
+      font-size: 14px;
+      margin: 15px auto 0;
+      max-width: 600px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 20px;
+    }
+
+    .about-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card {
+      border-radius: 18px;
+      padding: 28px;
+    }
+
+    .card:hover {
+      border-color: rgba(52, 211, 153, 0.35);
+      transform: translateY(-4px);
+    }
+
+    .card,
+    .project-card {
+      transition:
+        transform 0.25s,
+        border-color 0.25s,
+        box-shadow 0.25s;
+    }
+
+    .card-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 17px;
+    }
+
+    .card-icon {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: rgba(16, 185, 129, 0.14);
+      color: #6ee7b7;
+    }
+
+    .card p {
+      color: #cbd5e1;
+      line-height: 1.75;
+      font-size: 15px;
+      margin: 0;
+    }
+
+    .facts {
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: 20px;
+    }
+
+    .fact {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 18px;
+      border-radius: 14px;
+    }
+
+    .fact strong {
+      display: block;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    .fact small {
+      color: #94a3b8;
+      display: block;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 3px;
+    }
+
+    .skills-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .skill-list {
+      display: grid;
+      gap: 18px;
+    }
+
+    .skill-row {
+      display: grid;
+      gap: 7px;
+    }
+
+    .skill-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: #dbeafe;
+    }
+
+    .skill-label b {
+      color: #6ee7b7;
+      font: 600 11px "JetBrains Mono", monospace;
+    }
+
+    .skill-track {
+      height: 8px;
+      border-radius: 999px;
+      background: #202a26;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .skill-fill {
+      height: 100%;
+      width: var(--level);
+      display: block;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #10b981, #06b6d4);
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+      animation: fill 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+      transform-origin: left;
+    }
+
+    .skill-card:nth-child(2) .card-icon {
+      background: rgba(6, 182, 212, 0.15);
+      color: #67e8f9;
+    }
+
+    .skill-card:nth-child(3) .card-icon {
+      background: rgba(52, 211, 153, 0.15);
+      color: #6ee7b7;
+    }
+
+    .timeline {
+      max-width: 840px;
+      margin: auto;
+      display: grid;
+      gap: 18px;
+      position: relative;
+      padding-left: 66px;
+    }
+
+    .timeline:before {
+      content: "";
+      position: absolute;
+      left: 20px;
+      top: 20px;
+      bottom: 20px;
+      width: 1px;
+      background: linear-gradient(#10b981, #06b6d4, #34d399);
+    }
+
+    .activity {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .node {
+      position: absolute;
+      left: -66px;
+      top: 18px;
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 1px solid #10b981;
+      border-radius: 11px;
+      background: #0b1511;
+      color: #6ee7b7;
+      font: 600 13px "JetBrains Mono";
+    }
+
+    .activity-toggle {
+      width: 100%;
+      padding: 22px 24px;
+      background: transparent;
+      border: 0;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-align: left;
+    }
+
+    .activity-toggle small {
+      display: block;
+      color: #34d399;
+      font: 600 11px "JetBrains Mono";
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 6px;
+    }
+
+    .activity-toggle svg {
+      color: #94a3b8;
+      transition: 0.25s;
+    }
+
+    .activity.open .activity-toggle svg {
+      transform: rotate(180deg);
+    }
+
+    .activity-body {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.35s;
+    }
+
+    .activity.open .activity-body {
+      grid-template-rows: 1fr;
+    }
+
+    .activity-body > div {
+      overflow: hidden;
+      padding: 0 24px;
+    }
+
+    .activity.open .activity-body > div {
+      padding-bottom: 22px;
+    }
+
+    .activity-body p {
+      color: #cbd5e1;
+      font-size: 14px;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 14px;
+    }
+
+    .tag {
+      padding: 5px 9px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--line);
+      color: #cbd5e1;
+      font: 11px "JetBrains Mono";
+    }
+
+    .filter-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: -17px 0 28px;
+    }
+
+    .filter {
+      padding: 9px 14px;
+      border-radius: 9px;
+      color: #cbd5e1;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--line);
+      font-size: 13px;
+      transition: 0.2s;
+    }
+
+    .filter.active,
+    .filter:hover {
+      color: #6ee7b7;
+      background: rgba(16, 185, 129, 0.14);
+      border-color: rgba(16, 185, 129, 0.5);
+    }
+
+    .projects {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 342px;
+      border-radius: 18px;
+      padding: 25px;
+    }
+
+    .project-card h3 {
+      font-size: 19px;
+      margin: 15px 0 10px;
+    }
+
+    .project-card p {
+      color: #cbd5e1;
+      line-height: 1.7;
+      font-size: 14px;
+      flex: 1;
+      margin: 0;
+    }
+
+    .project-icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      background: rgba(16, 185, 129, 0.14);
+      color: #6ee7b7;
+    }
+
+    .project-card:nth-child(even) .project-icon {
+      background: rgba(6, 182, 212, 0.14);
+      color: #67e8f9;
+    }
+
+    .project-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 22px;
+    }
+
+    .project-actions .btn {
+      padding: 9px 12px;
+      font-size: 12px;
+    }
+
+    .project-actions .btn svg {
+      width: 15px;
+    }
+
+    .terminal-wrap {
+      max-width: 840px;
+      margin: auto;
+    }
+
+    .terminal {
+      overflow: hidden;
+      border-radius: 17px;
+      background: rgba(4, 8, 6, 0.9);
+      border: 1px solid var(--line);
+      box-shadow: 0 20px 70px rgba(0, 0, 0, 0.25);
+    }
+
+    .term-head {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 13px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      color: #94a3b8;
+      font: 11px "JetBrains Mono";
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #ef4444;
+    }
+
+    .dot:nth-child(2) {
+      background: #f59e0b;
+    }
+
+    .dot:nth-child(3) {
+      background: #10b981;
+    }
+
+    .term-output {
+      height: 270px;
+      overflow-y: auto;
+      padding: 18px;
+      color: #6ee7b7;
+      font: 13px/1.7 "JetBrains Mono";
+      white-space: pre-wrap;
+    }
+
+    .term-input {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      padding: 14px 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      font: 13px "JetBrains Mono";
+    }
+
+    .term-input span {
+      color: #06b6d4;
+    }
+
+    .term-input input {
+      flex: 1;
+      min-width: 0;
+      background: transparent;
+      border: 0;
+      outline: 0;
+      color: #d1fae5;
+      font: inherit;
+    }
+
+    .term-input input::placeholder {
+      color: #475569;
+    }
+
+    .contact-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .contact-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .contact-copy p {
+      color: #cbd5e1;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .contact-links {
+      display: grid;
+      gap: 11px;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      padding: 15px 16px;
+      transition: 0.2s;
+    }
+
+    .contact-link:hover {
+      transform: translateX(4px);
+      border-color: rgba(52, 211, 153, 0.4);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .contact-link .brand-icon {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: rgba(16, 185, 129, 0.14);
+      color: #6ee7b7;
+    }
+
+    .contact-link:nth-child(2) .brand-icon {
+      background: rgba(6, 182, 212, 0.14);
+      color: #67e8f9;
+    }
+
+    .contact-link strong {
+      display: block;
+      font-size: 14px;
+      color: #fff;
+    }
+
+    .contact-link small {
+      display: block;
+      color: #94a3b8;
+      font-size: 12px;
+      margin-top: 3px;
+      word-break: break-word;
+    }
+
+    .contact-link .arrow {
+      margin-left: auto;
+      color: #64748b;
+    }
+
+    .contact-details {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .detail {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 14px;
+      border-radius: 13px;
+    }
+
+    .detail svg {
+      color: #6ee7b7;
+    }
+
+    .detail small {
+      display: block;
+      color: #94a3b8;
+      font-size: 11px;
+    }
+
+    .detail a {
+      display: block;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      margin-top: 3px;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 38px 0;
+      color: #94a3b8;
+      font-size: 13px;
+    }
+
+    .footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 7px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition:
+        opacity 0.7s,
+        transform 0.7s;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 30;
+      display: none;
+      place-items: center;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.72);
+      backdrop-filter: blur(7px);
+    }
+
+    .modal.show {
+      display: grid;
+    }
+
+    .modal-card {
+      position: relative;
+      max-width: 650px;
+      width: 100%;
+      max-height: 85vh;
+      overflow: auto;
+      padding: 30px;
+      border-radius: 18px;
+    }
+
+    .close {
+      position: absolute;
+      right: 14px;
+      top: 14px;
+      border: 0;
+      background: rgba(255, 255, 255, 0.06);
+      color: #cbd5e1;
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+    }
+
+    .modal-card p,
+    .modal-card li {
+      color: #cbd5e1;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    .modal-card ul {
+      padding-left: 20px;
+    }
+
+    .modal-card h4 {
+      color: #34d399;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 12px;
+      margin: 24px 0 10px;
+    }
+
+    @keyframes float {
+      50% {
+        transform: translate(18px, -22px);
+      }
+    }
+
+    @keyframes bounce {
+      50% {
+        transform: translate(-50%, 8px);
+      }
+    }
+
+    @keyframes fill {
+      from {
+        transform: scaleX(0);
+      }
+
+      to {
+        transform: scaleX(1);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *:before,
+      *:after {
+        animation-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .nav-links {
+        display: none;
+      }
+
+      .menu-btn {
+        display: block;
+      }
+
+      .mobile-menu.open {
+        display: grid;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .skills-grid .skill-card:last-child {
+        grid-column: 1 / -1;
+      }
+
+      .nav-links + button {
+        display: block;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .wrap {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .section {
+        padding: 82px 0;
+      }
+
+      .hero-content {
+        padding-top: 112px;
+      }
+
+      .about-grid,
+      .facts,
+      .skills-grid,
+      .projects,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .skills-grid .skill-card:last-child {
+        grid-column: auto;
+      }
+
+      .facts {
+        gap: 10px;
+      }
+
+      .timeline {
+        padding-left: 45px;
+      }
+
+      .timeline:before {
+        left: 14px;
+      }
+
+      .node {
+        left: -45px;
+        width: 31px;
+        height: 31px;
+        top: 18px;
+        font-size: 11px;
+      }
+
+      .activity-toggle {
+        padding: 19px 16px;
+      }
+
+      .activity-body > div {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .project-card {
+        min-height: 0;
+      }
+
+      .contact-details {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-row {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .social-mini {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="bgCanvas" aria-hidden="true"></canvas>
+  <div id="root" aria-hidden="true"></div>
+
+  <header id="navbar">
+    <nav class="wrap">
+      <a class="brand" href="#home" data-testid="brand-home-link">
+        <span class="brand-mark">
+          <i data-lucide="terminal"></i>
+        </span>
+        <span>Yukta<span>.dev</span></span>
+      </a>
+
+      <div class="nav-links">
+        <button data-nav="home" data-testid="nav-home-button">Home</button>
+        <button data-nav="about" data-testid="nav-about-button">About</button>
+        <button data-nav="skills" data-testid="nav-skills-button">Skills</button>
+        <button data-nav="activities" data-testid="nav-activities-button">Activities</button>
+        <button data-nav="projects" data-testid="nav-projects-button">Projects</button>
+        <button data-nav="terminal" data-testid="nav-terminal-button">Terminal</button>
+        <button data-nav="contact" data-testid="nav-contact-button">Contact</button>
+
+        <div class="social-mini">
+          <a class="icon-btn" href="https://github.com/YUKTA2907" target="_blank" rel="noopener noreferrer" aria-label="GitHub" data-testid="header-github-link">
+            <i data-lucide="github"></i>
+          </a>
+          <a class="icon-btn" href="https://www.linkedin.com/in/yukta-s-viraktamath-64a1293b4/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" data-testid="header-linkedin-link">
+            <i data-lucide="linkedin"></i>
+          </a>
+        </div>
+      </div>
+
+      <button class="menu-btn" id="menuBtn" aria-label="Open navigation menu" data-testid="mobile-menu-button">
+        <i data-lucide="menu"></i>
+      </button>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <button data-nav="home" data-testid="mobile-nav-home-button">Home</button>
+      <button data-nav="about" data-testid="mobile-nav-about-button">About</button>
+      <button data-nav="skills" data-testid="mobile-nav-skills-button">Skills</button>
+      <button data-nav="activities" data-testid="mobile-nav-activities-button">Activities</button>
+      <button data-nav="projects" data-testid="mobile-nav-projects-button">Projects</button>
+      <button data-nav="terminal" data-testid="mobile-nav-terminal-button">Terminal</button>
+      <button data-nav="contact" data-testid="mobile-nav-contact-button">Contact</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="orb one"></div>
+      <div class="orb two"></div>
+
+      <div class="hero-content">
+        <div class="eyebrow" data-testid="availability-status">
+          <span class="pulse"></span>
+          Learning, building &amp; open to collaboration
+        </div>
+
+        <h1>
+          <span>Hi, I'm </span>
+          <span class="gradient glow" id="typedName" data-testid="hero-name">
+            Yukta S Viraktamath
+          </span>
+        </h1>
+
+        <p data-testid="hero-description">
+          CSIT Student · Aspiring Software Developer · Problem Solver
+        </p>
+
+        <p class="subtle" data-testid="hero-education">
+          3rd Semester · B.Tech CSIT · REVA University, Bengaluru
+        </p>
+
+        <div class="actions">
+          <button class="btn btn-primary" data-nav="projects" data-testid="explore-projects-button">
+            <i data-lucide="folder-git-2"></i>
+            Explore Projects
+          </button>
+
+          <a class="btn btn-ghost" href="https://leetcode.com/u/Yukta_2907/" target="_blank" rel="noopener noreferrer" data-testid="hero-leetcode-link">
+            <i data-lucide="code-2"></i>
+            LeetCode
+          </a>
+
+          <a class="btn btn-ghost" href="https://www.hackerrank.com/profile/yukta29nvn" target="_blank" rel="noopener noreferrer" data-testid="hero-hackerrank-link">
+            <i data-lucide="trophy"></i>
+            HackerRank
+          </a>
+        </div>
+      </div>
+
+      <button class="scroll-cue" data-nav="about" aria-label="Scroll to about section" data-testid="scroll-about-button">
+        <i data-lucide="arrow-down"></i>
+      </button>
+    </section>
+
+    <section id="about" class="section wrap">
+      <div class="section-head reveal">
+        <span class="kicker">About Me</span>
+        <h2>Learning by <span class="gradient">building</span></h2>
+      </div>
+
+      <div class="grid about-grid">
+        <article class="glass card reveal">
+          <div class="card-title">
+            <span class="card-icon">
+              <i data-lucide="sparkles"></i>
+            </span>
+            <h3>Who I Am</h3>
+          </div>
+
+          <p data-testid="about-who-text">
+            I'm a B.Tech CSIT student at REVA University, Bengaluru, and an aspiring software developer. I'm building strong programming fundamentals, learning how software works, and enjoying the process of turning small ideas into working projects.
+          </p>
+        </article>
+
+        <article class="glass card reveal">
+          <div class="card-title">
+            <span class="card-icon">
+              <i data-lucide="target"></i>
+            </span>
+            <h3>My Focus</h3>
+          </div>
+
+          <p data-testid="about-focus-text">
+            I'm learning Data Structures and Algorithms through regular practice on LeetCode and HackerRank. I also practice version control and collaborative development with Git, GitHub, GitLens, and Live Share while improving my problem-solving abilities through small projects.
+          </p>
+        </article>
+      </div>
+
+      <div class="grid facts reveal">
+        <div class="glass fact" data-testid="institution-fact">
+          <span class="card-icon">
+            <i data-lucide="graduation-cap"></i>
+          </span>
+          <div>
+            <small>Institution</small>
+            <strong>REVA University</strong>
+          </div>
+        </div>
+
+        <div class="glass fact" data-testid="program-fact">
+          <span class="card-icon">
+            <i data-lucide="book-open"></i>
+          </span>
+          <div>
+            <small>Program</small>
+            <strong>B.Tech CSIT · 3rd Sem</strong>
+          </div>
+        </div>
+
+        <div class="glass fact" data-testid="location-fact">
+          <span class="card-icon">
+            <i data-lucide="map-pin"></i>
+          </span>
+          <div>
+            <small>Location</small>
+            <strong>Bengaluru, India</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="section wrap">
+      <div class="section-head reveal">
+        <span class="kicker">Skills Matrix</span>
+        <h2>My <span class="gradient">toolkit</span></h2>
+        <p>Student-level skills I’m actively practicing and strengthening.</p>
+      </div>
+
+      <div class="grid skills-grid">
+        <article class="glass card skill-card reveal">
+          <div class="card-title">
+            <span class="card-icon">
+              <i data-lucide="code-2"></i>
+            </span>
+            <h3>Programming</h3>
+          </div>
+
+          <div class="skill-list">
+            <div class="skill-row">
+              <div class="skill-label">
+                <span>C / C++</span>
+                <b>68%</b>
+              </div>
+              <div class="skill-track">
+                <span class="skill-fill" style="--level:68%"></span>
+              </div>
+            </div>
+
+            <div class="skill-row">
+              <div class="skill-label">
+                <span>Python</span>
+                <b>62%</b>
+              </div>
+              <div class="skill-track">
+                <span class="skill-fill" style="--level:62%"></span>
+              </div>
+            </div>
+
+            <div class="skill-row">
+              <div class="skill-label">
+                <span>Java</span>
+                <b>52%</b>
+              </div>
+              <div class="skill-track">
+                <span class="skill-fill" style="--level:52%"></span>
+              </div>
+            </div>
+
+            <div class="skill-row">
+              <div class="skill-label">
+                <span>SQL</span>
+                <b>55%</b>
+              </div>
+              <div class="skill-track">
+                <span class="skill-fill" style="--level:55%"></span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="glass card skill-card reveal">
+          <div class="card-title">
+            <span class="card-icon">
+              <i data-lucide="globe-2"></i>
+            </span>
+            <h3>Web</h3>
+          </div>
+
+          <div class="skill-list">
+            <div class="skill-row">
+              <div class="skill-label">
+                <span>HTML</span>
+                <b>72%</b>
+              </div>
+              <div class="skill-track">
+                <span class="skill-fill" style="--level:72%"></span>
+              </div>
+            </div>
+
+            <div class="skill-row">
+              <div class="skill-label">
+                <span>CSS</span>
+                <b>64%</b>
+              </div>
+              <div class="skill-track">
+                <span class="skill-fill" style="--level:64%"></span>
+              </div>
+            </div>
+
+            <div class="skill-row">
+              <div class="skill-label">
+                <span>JavaScript</span>
+                <b>58%</b>
+              </div>
+              <div class="skill-track">
+                <span class="skill-fill" style="--level:58%"></span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="glass card skill-card reveal">
+          <div class="card-title">
+            <span class="card-icon">
+              <i data-lucide="wrench"></i>
+            </span>
+            <h3>Tools &amp; Platforms</h3>
+          </div>
+
+          <div class="skill-list">
+            <div class="skill-row">
+              <div class="skill-label">
+                <span>VS Code</span>
+                <b>78%</b>
+              </div>
+              <div class="skill-track">
+                <span class="skill-fill" style="--level:78%"></span>
+              </div>
+            </div>
+
+            <div class="skill-row">
+              <div class="skill-label">
+                <span>Git / GitHub</span>
+                <b>62%</b>
+              </div>
+              <div class="skill-track">
+                <span class="skill-fill" style="--level:62%"></span>
+              </div>
+            </div>
+
+            <div class="skill-row">
+              <div class="skill-label">
+                <span>GitLens / Live Share</span>
+                <b>50%</b>
+              </div>
+              <div class="skill-track">
+                <span class="skill-fill" style="--level:50%"></span>
+              </div>
+            </div>
+
+            <div class="skill-row">
+              <div class="skill-label">
+                <span>LeetCode / HackerRank</span>
+                <b>58%</b>
+              </div>
+              <div class="skill-track">
+                <span class="skill-fill" style="--level:58%"></span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="activities" class="section wrap">
+      <div class="section-head reveal">
+        <span class="kicker">Activity Log</span>
+        <h2>My <span class="gradient">activities</span></h2>
+        <p>Click a card to expand and see what I’ve been learning.</p>
+      </div>
+
+      <div class="timeline reveal">
+        <article class="glass activity">
+          <span class="node">0</span>
+          <button class="activity-toggle" data-testid="activity-0-toggle">
+            <div>
+              <small>Activity 0</small>
+              <h3>Development Environment Setup</h3>
+            </div>
+            <i data-lucide="chevron-down"></i>
+          </button>
+
+          <div class="activity-body">
+            <div>
+              <p>
+                Configured a beginner-friendly development environment with VS Code, Git, terminal utilities, and language support for C, C++, and Python.
+              </p>
+
+              <div class="tags">
+                <span class="tag">VS Code</span>
+                <span class="tag">Git</span>
+                <span class="tag">C / C++</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="glass activity">
+          <span class="node">1</span>
+          <button class="activity-toggle" data-testid="activity-1-toggle">
+            <div>
+              <small>Activity 1</small>
+              <h3>VS Code &amp; Workspace Configuration</h3>
+            </div>
+            <i data-lucide="chevron-down"></i>
+          </button>
+
+          <div class="activity-body">
+            <div>
+              <p>
+                Learned to configure my workspace, explore extensions, work with compiler settings, and make VS Code a comfortable place to practice programming.
+              </p>
+
+              <div class="tags">
+                <span class="tag">VS Code</span>
+                <span class="tag">Extensions</span>
+                <span class="tag">Compiler</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="glass activity">
+          <span class="node">2</span>
+          <button class="activity-toggle" data-testid="activity-2-toggle">
+            <div>
+              <small>Activity 2</small>
+              <h3>Git &amp; GitHub Integration</h3>
+            </div>
+            <i data-lucide="chevron-down"></i>
+          </button>
+
+          <div class="activity-body">
+            <div>
+              <p>
+                Learned the fundamentals of version control with Git and GitHub, including repositories, commits, pushing code, and keeping programming work organized.
+              </p>
+
+              <div class="tags">
+                <span class="tag">Git</span>
+                <span class="tag">GitHub</span>
+                <span class="tag">Commits</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="glass activity">
+          <span class="node">3</span>
+          <button class="activity-toggle" data-testid="activity-3-toggle">
+            <div>
+              <small>Activity 3</small>
+              <h3>GitLens &amp; Live Share Exploration</h3>
+            </div>
+            <i data-lucide="chevron-down"></i>
+          </button>
+
+          <div class="activity-body">
+            <div>
+              <p>
+                Explored GitLens for repository history and commit context, and Live Share for learning how collaborative coding workflows work in VS Code.
+              </p>
+
+              <div class="tags">
+                <span class="tag">GitLens</span>
+                <span class="tag">Live Share</span>
+                <span class="tag">Collaboration</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="glass activity">
+          <span class="node">4</span>
+          <button class="activity-toggle" data-testid="activity-4-toggle">
+            <div>
+              <small>Activity 4</small>
+              <h3>LeetCode Algorithmic Practice</h3>
+            </div>
+            <i data-lucide="chevron-down"></i>
+          </button>
+
+          <div class="activity-body">
+            <div>
+              <p>
+                Practice programming and DSA concepts by solving LeetCode challenges, organizing solutions, and learning from problems that strengthen logic and problem-solving.
+              </p>
+
+              <div class="tags">
+                <span class="tag">LeetCode</span>
+                <span class="tag">DSA</span>
+                <span class="tag">C</span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="projects" class="section wrap">
+      <div class="section-head reveal">
+        <span class="kicker">Things I’m Building</span>
+        <h2>Practice made <span class="gradient">visible</span></h2>
+        <p>Small projects and learning activities that document my progress.</p>
+      </div>
+
+      <div class="filter-row reveal">
+        <button class="filter active" data-filter="all" data-testid="filter-all-button">
+          All
+        </button>
+        <button class="filter" data-filter="programming" data-testid="filter-programming-button">
+          Programming / DSA
+        </button>
+        <button class="filter" data-filter="collaboration" data-testid="filter-collaboration-button">
+          Git &amp; Collaboration
+        </button>
+        <button class="filter" data-filter="web" data-testid="filter-web-button">
+          Web
+        </button>
+      </div>
+
+      <div id="projectGrid" class="grid projects"></div>
+    </section>
+
+    <section id="terminal" class="section wrap">
+      <div class="section-head reveal">
+        <span class="kicker">Interactive</span>
+        <h2>Live <span class="gradient">terminal</span></h2>
+        <p>
+          Try <code style="color:#6ee7b7">help</code> to see what this portfolio can tell you.
+        </p>
+      </div>
+
+      <div class="terminal-wrap reveal">
+        <div class="terminal">
+          <div class="term-head">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span style="margin-left:5px">yukta@portfolio: ~</span>
+          </div>
+
+          <div class="term-output" id="termOutput" data-testid="terminal-output"></div>
+
+          <label class="term-input">
+            <span>visitor@portfolio:~$</span>
+            <input id="termInput" type="text" autocomplete="off" spellcheck="false" placeholder="type a command..." aria-label="Terminal command input" data-testid="terminal-input" />
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section wrap">
+      <div class="section-head reveal">
+        <span class="kicker">Contact</span>
+        <h2>Get in <span class="gradient">touch</span></h2>
+        <p>Interested in connecting, collaborating, or following along as I learn?</p>
+      </div>
+
+      <div class="grid contact-grid">
+        <div class="glass card contact-copy reveal">
+          <h3>Let’s connect</h3>
+
+          <p>
+            I’m always happy to hear about programming projects, learning opportunities, and thoughtful collaborations.
+          </p>
+
+          <div class="contact-details">
+            <div class="glass detail">
+              <i data-lucide="mail"></i>
+              <div>
+                <small>Email</small>
+                <a href="mailto:yukta29nvn@gmail.com" data-testid="email-link">
+                  yukta29nvn@gmail.com
+                </a>
+              </div>
+            </div>
+
+            <div class="glass detail">
+              <i data-lucide="phone"></i>
+              <div>
+                <small>Phone</small>
+                <a href="tel:+918660095866" data-testid="phone-link">
+                  +91 86600 95866
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-links reveal">
+          <a class="glass contact-link" href="https://github.com/YUKTA2907" target="_blank" rel="noopener noreferrer" aria-label="Visit GitHub profile" data-testid="contact-github-link">
+            <span class="brand-icon">
+              <i data-lucide="github"></i>
+            </span>
+            <span>
+              <strong>GitHub</strong>
+              <small>github.com/YUKTA2907</small>
+            </span>
+            <span class="arrow">↗</span>
+          </a>
+
+          <a class="glass contact-link" href="https://www.linkedin.com/in/yukta-s-viraktamath-64a1293b4/" target="_blank" rel="noopener noreferrer" aria-label="Visit LinkedIn profile" data-testid="contact-linkedin-link">
+            <span class="brand-icon">
+              <i data-lucide="linkedin"></i>
+            </span>
+            <span>
+              <strong>LinkedIn</strong>
+              <small>Connect and follow my journey</small>
+            </span>
+            <span class="arrow">↗</span>
+          </a>
+
+          <a class="glass contact-link" href="https://leetcode.com/u/Yukta_2907/" target="_blank" rel="noopener noreferrer" aria-label="Visit LeetCode profile" data-testid="contact-leetcode-link">
+            <span class="brand-icon">
+              <i data-lucide="code-2"></i>
+            </span>
+            <span>
+              <strong>LeetCode</strong>
+              <small>leetcode.com/u/Yukta_2907</small>
+            </span>
+            <span class="arrow">↗</span>
+          </a>
+
+          <a class="glass contact-link" href="https://www.hackerrank.com/profile/yukta29nvn" target="_blank" rel="noopener noreferrer" aria-label="Visit HackerRank profile" data-testid="contact-hackerrank-link">
+            <span class="brand-icon">
+              <i data-lucide="trophy"></i>
+            </span>
+            <span>
+              <strong>HackerRank</strong>
+              <small>hackerrank.com/profile/yukta29nvn</small>
+            </span>
+            <span class="arrow">↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-row">
+      <div>
+        <strong style="color:#fff">Yukta S Viraktamath</strong>
+        <div style="margin-top:5px">
+          CSIT Student · REVA University · Bengaluru
+        </div>
+      </div>
+
+      <div class="footer-social">
+        <a class="icon-btn" href="https://github.com/YUKTA2907" target="_blank" rel="noopener noreferrer" aria-label="GitHub" data-testid="footer-github-link">
+          <i data-lucide="github"></i>
+        </a>
+        <a class="icon-btn" href="https://www.linkedin.com/in/yukta-s-viraktamath-64a1293b4/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" data-testid="footer-linkedin-link">
+          <i data-lucide="linkedin"></i>
+        </a>
+        <a class="icon-btn" href="https://leetcode.com/u/Yukta_2907/" target="_blank" rel="noopener noreferrer" aria-label="LeetCode" data-testid="footer-leetcode-link">
+          <i data-lucide="code-2"></i>
+        </a>
+        <a class="icon-btn" href="https://www.hackerrank.com/profile/yukta29nvn" target="_blank" rel="noopener noreferrer" aria-label="HackerRank" data-testid="footer-hackerrank-link">
+          <i data-lucide="trophy"></i>
+        </a>
+      </div>
+
+      <button class="icon-btn" data-nav="home" aria-label="Back to top" data-testid="back-to-top-button">
+        <i data-lucide="arrow-up"></i>
+      </button>
+    </div>
+  </footer>
+
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Project details">
+    <div class="glass modal-card">
+      <button class="close" id="modalClose" aria-label="Close project details" data-testid="project-modal-close-button">
+        <i data-lucide="x"></i>
+      </button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <script>
+    const projects = [
+      {
+        id: "git",
+        cat: "collaboration",
+        icon: "git-branch",
+        title: "Git & GitHub Integration",
+        short: "An early project and learning activity where I practiced repositories, commits, pushing code, and the basics of a version control workflow.",
+        tags: ["Git", "GitHub", "C", "Version Control"],
+        detail: "This early project helped me learn how to create a repository, track changes with commits, push code to GitHub, and keep programming work organized.",
+        links: [
+          ["View Repository", "https://github.com/YUKTA2907/HELLOWORLD-c", "github"]
+        ]
+      },
+      {
+        id: "leetcode",
+        cat: "programming",
+        icon: "code-2",
+        title: "LeetCode Algorithmic Practice",
+        short: "A growing practice space for programming, problem-solving, algorithms, and Data Structures and Algorithms concepts.",
+        tags: ["LeetCode", "DSA", "C", "Problem Solving"],
+        detail: "I use LeetCode to practice programming logic, work through algorithmic challenges, and build a stronger foundation in DSA one problem at a time.",
+        links: [
+          ["View Repository", "https://github.com/YUKTA2907/leetcode-solutions", "github"],
+          ["View LeetCode Profile", "https://leetcode.com/u/Yukta_2907/", "code-2"]
+        ]
+      },
+      {
+        id: "hackerrank",
+        cat: "programming",
+        icon: "trophy",
+        title: "HackerRank Problem Solving",
+        short: "A programming practice project for strengthening problem-solving skills and working through coding challenges.",
+        tags: ["HackerRank", "Challenges", "C", "Practice"],
+        detail: "HackerRank gives me another way to practice coding challenges, explore different problem patterns, and steadily improve my programming confidence.",
+        links: [
+          ["View Repository", "https://github.com/YUKTA2907/HackerRank-3rdSem-R25EJ179", "github"],
+          ["View HackerRank Profile", "https://www.hackerrank.com/profile/yukta29nvn", "trophy"]
+        ]
+      },
+      {
+        id: "live-share",
+        cat: "collaboration",
+        icon: "users",
+        title: "Live Share",
+        short: "A learning project exploring collaborative development with VS Code Live Share, GitLens, Git, and GitHub workflows.",
+        tags: ["Live Share", "GitLens", "GitHub", "Collaboration"],
+        detail: "This project helped me explore how developers can work together, review repository history, and learn collaborative coding workflows with VS Code tools.",
+        links: [
+          ["View Repository", "https://github.com/YUKTA2907/Portfolio-develpment", "github"]
+        ]
+      },
+      {
+        id: "sih",
+        cat: "web",
+        icon: "layout-template",
+        title: "Smart India Hackathon (SIH 2026) Frontend",
+        short: "A frontend project experience for Smart India Hackathon, documented through a project post on LinkedIn.",
+        tags: ["Frontend", "Project Experience", "SIH 2026"],
+        detail: "I worked on a frontend project experience for Smart India Hackathon. The project is shared through LinkedIn without overstating my role or contribution.",
+        links: [
+          ["View Project on LinkedIn", "https://lnkd.in/p/dtv-shR6", "linkedin"]
+        ]
+      }
+    ];
+
+    const $ = (selector) => document.querySelector(selector);
+    const $$ = (selector) => [...document.querySelectorAll(selector)];
+
+    function iconRefresh() {
+      document
+        .querySelectorAll('[data-lucide="github"]')
+        .forEach((icon) => {
+          icon.dataset.lucide = "git-branch";
+        });
+
+      document
+        .querySelectorAll('[data-lucide="linkedin"]')
+        .forEach((icon) => {
+          icon.dataset.lucide = "briefcase-business";
+        });
+
+      lucide.createIcons();
+    }
+
+    function go(id) {
+      document.getElementById(id)?.scrollIntoView({
+        behavior: "smooth"
+      });
+
+      $("#mobileMenu").classList.remove("open");
+    }
+
+    $$("[data-nav]").forEach((button) => {
+      button.addEventListener("click", () => go(button.dataset.nav));
+    });
+
+    $("#menuBtn").addEventListener("click", () => {
+      $("#mobileMenu").classList.toggle("open");
+      iconRefresh();
+    });
+
+    window.addEventListener("scroll", () => {
+      $("#navbar").classList.toggle("scrolled", scrollY > 25);
+    });
+
+    function renderProjects(filter = "all") {
+      const grid = $("#projectGrid");
+      grid.innerHTML = "";
+
+      projects
+        .filter((project) => filter === "all" || project.cat === filter)
+        .forEach((project, index) => {
+          const element = document.createElement("article");
+
+          element.className = "glass project-card reveal visible";
+          element.dataset.testid = `project-card-${project.id}`;
+          element.style.transitionDelay = `${index * 0.06}s`;
+
+          element.innerHTML = `
+            <div class="project-icon">
+              <i data-lucide="${project.icon}"></i>
+            </div>
+
+            <h3>${project.title}</h3>
+            <p>${project.short}</p>
+
+            <div class="tags">
+              ${project.tags
+                .map((tag) => `<span class="tag">${tag}</span>`)
+                .join("")}
+            </div>
+
+            <div class="project-actions">
+              <button
+                class="btn btn-ghost details"
+                data-id="${project.id}"
+                data-testid="project-details-${project.id}-button"
+              >
+                <i data-lucide="info"></i>
+                Details
+              </button>
+
+              ${project.links
+                .map(
+                  (link) => `
+                    <a
+                      class="btn btn-primary"
+                      href="${link[1]}"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      data-testid="project-link-${project.id}-${link[2]}"
+                    >
+                      <i data-lucide="${link[2]}"></i>
+                      ${link[0]}
+                    </a>
+                  `
+                )
+                .join("")}
+            </div>
+          `;
+
+          grid.appendChild(element);
+        });
+
+      $$(".details").forEach((button) => {
+        button.addEventListener("click", () => openModal(button.dataset.id));
+      });
+
+      iconRefresh();
+    }
+
+    $$(".filter").forEach((button) => {
+      button.addEventListener("click", () => {
+        $$(".filter").forEach((item) => item.classList.remove("active"));
+        button.classList.add("active");
+        renderProjects(button.dataset.filter);
+      });
+    });
+
+    function openModal(id) {
+      const project = projects.find((item) => item.id === id);
+
+      $("#modalContent").innerHTML = `
+        <h3 style="font-size:22px;margin:0 0 12px;color:#fff">
+          ${project.title}
+        </h3>
+
+        <p>${project.detail}</p>
+
+        <h4>Focus areas</h4>
+
+        <div class="tags">
+          ${project.tags
+            .map((tag) => `<span class="tag">${tag}</span>`)
+            .join("")}
+        </div>
+
+        <div class="project-actions" style="margin-top:24px">
+          ${project.links
+            .map(
+              (link) => `
+                <a
+                  class="btn btn-primary"
+                  href="${link[1]}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i data-lucide="${link[2]}"></i>
+                  ${link[0]}
+                </a>
+              `
+            )
+            .join("")}
+        </div>
+      `;
+
+      $("#modal").classList.add("show");
+      iconRefresh();
+    }
+
+    function closeModal() {
+      $("#modal").classList.remove("show");
+    }
+
+    $("#modalClose").addEventListener("click", closeModal);
+
+    $("#modal").addEventListener("click", (event) => {
+      if (event.target.id === "modal") {
+        closeModal();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeModal();
+      }
+    });
+
+    $$(".activity-toggle").forEach((button) => {
+      button.addEventListener("click", () => {
+        button.closest(".activity").classList.toggle("open");
+      });
+    });
+
+    const commands = {
+      help: `Available commands:
+  about     — who I am
+  skills    — my current toolkit
+  projects  — what I am building
+  contact   — how to reach me
+  social    — profile links
+  clear     — clear the terminal`,
+
+      about: `Yukta S Viraktamath — CSIT student at REVA University, Bengaluru.
+Aspiring software developer building programming fundamentals, DSA knowledge, and problem-solving experience.`,
+
+      skills: `Programming: C, C++, Python, Java, SQL
+Web: HTML, CSS, JavaScript
+Tools: VS Code, Git, GitHub, GitLens, Live Share
+Practice: LeetCode, HackerRank`,
+
+      projects: `1. Git & GitHub Integration
+2. LeetCode Algorithmic Practice
+3. HackerRank Problem Solving
+4. Live Share
+5. Smart India Hackathon (SIH 2026) Frontend`,
+
+      contact: `Email: yukta29nvn@gmail.com
+Phone: +91 86600 95866`,
+
+      social: `GitHub: github.com/YUKTA2907
+LinkedIn: linkedin.com/in/yukta-s-viraktamath-64a1293b4
+LeetCode: leetcode.com/u/Yukta_2907
+HackerRank: hackerrank.com/profile/yukta29nvn`
+    };
+
+    function print(text, className = "") {
+      const element = document.createElement("div");
+      element.textContent = text;
+      element.className = className;
+      $("#termOutput").appendChild(element);
+      $("#termOutput").scrollTop = 99999;
+    }
+
+    function run(command) {
+      print(`visitor@portfolio:~$ ${command}`, "term-command");
+
+      const key = command.trim().toLowerCase();
+
+      if (key === "clear") {
+        $("#termOutput").innerHTML = "";
+        return;
+      }
+
+      print(
+        commands[key] || "command not found — type 'help' for options",
+        commands[key] ? "" : "term-error"
+      );
+    }
+
+    $("#termInput").addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        run(event.target.value);
+        event.target.value = "";
+      }
+    });
+
+    print("Welcome to Yukta's portfolio terminal. Type 'help' to begin.");
+    print("");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.12
+      }
+    );
+
+    $$(".reveal").forEach((element) => observer.observe(element));
+
+    const canvas = $("#bgCanvas");
+    const context = canvas.getContext("2d");
+    let points = [];
+
+    function resize() {
+      canvas.width = innerWidth;
+      canvas.height = innerHeight;
+
+      points = Array.from(
+        {
+          length: Math.min(
+            55,
+            Math.floor((innerWidth * innerHeight) / 28000)
+          )
+        },
+        () => ({
+          x: Math.random() * innerWidth,
+          y: Math.random() * innerHeight,
+          vx: (Math.random() - 0.5) * 0.25,
+          vy: (Math.random() - 0.5) * 0.25,
+          r: Math.random() * 1.5 + 0.3
+        })
+      );
+    }
+
+    function draw() {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+
+      points.forEach((point) => {
+        point.x += point.vx;
+        point.y += point.vy;
+
+        if (point.x < 0 || point.x > innerWidth) {
+          point.vx *= -1;
+        }
+
+        if (point.y < 0 || point.y > innerHeight) {
+          point.vy *= -1;
+        }
+
+        context.fillStyle = "rgba(16,185,129,.35)";
+        context.beginPath();
+        context.arc(point.x, point.y, point.r, 0, Math.PI * 2);
+        context.fill();
+      });
+
+      requestAnimationFrame(draw);
+    }
+
+    resize();
+    draw();
+
+    addEventListener("resize", resize);
+
+    renderProjects();
+    iconRefresh();
+  </script>
+</body>
+</html>
+```
